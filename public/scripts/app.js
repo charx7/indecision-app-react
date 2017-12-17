@@ -3,18 +3,24 @@
 console.log("App.js corre xD");
 
 // JSX - Javascript XML
+// Crear un objeto de app con titulo/subtitulo
+var app = {
+    titulo: "Indecision App",
+    subtitulo: "SubtituloXD"
+};
+// Usar titulo/subtitulo en el template
 var template = React.createElement(
     "div",
     null,
     React.createElement(
         "h1",
         null,
-        "Indecision App"
+        app.titulo
     ),
     React.createElement(
         "p",
         null,
-        "This is some info"
+        app.subtitulo
     ),
     React.createElement(
         "ol",
@@ -32,6 +38,16 @@ var template = React.createElement(
     )
 );
 
+var nombreUsuario = "Carlos Huerta";
+var edadUsuario = 27;
+var ubicacionUsuario = "Puebla";
+
+var usuario = {
+    nombre: "Charx",
+    edad: 25,
+    ubicacion: "algunLugarXD"
+};
+
 // Crear un template variable2 de JSX
 var templateDos = React.createElement(
     "div",
@@ -39,22 +55,24 @@ var templateDos = React.createElement(
     React.createElement(
         "h1",
         null,
-        "Carlos Huerta"
+        nombreUsuario.toUpperCase() + "!"
     ),
     React.createElement(
         "p",
         null,
-        "Age: 25"
+        "Age: ",
+        usuario.edad
     ),
     React.createElement(
         "p",
         null,
-        "Location: Puebla"
+        "Location: ",
+        ubicacionUsuario
     )
 );
 
+// Identifica el documento del DOM del HTML donde se aplciaran los cambios
 var appRoot = document.getElementById('app');
 
-// Render del primer template
-//ReactDOM.render(template, appRoot);
-ReactDOM.render(templateDos, appRoot);
+// Render del template
+ReactDOM.render(template, appRoot);
