@@ -26,15 +26,24 @@ var ubicacionUsuario = "Puebla";
 var usuario = {
     nombre: "Charx",
     edad: 25,
-    ubicacion: "algunLugarXD"
+    ubicacion: "Algun Lugar XD"
 };
+
+// Funcion que se utiliza para renderear un objeto en el template de JSX condicionalmente
+function obtenerLocacion() {
+    if(usuario.ubicacion != null){
+        return <p>Ubicacion: {usuario.ubicacion}</p>;
+    } else {
+        return undefined;
+    }
+}
 
 // Crear un template variable2 de JSX
 var templateDos = (
     <div>
-        <h1>{nombreUsuario.toUpperCase() + "!"}</h1>
+        <h1>{usuario.nombre ? usuario.nombre : 'Anonimo'}</h1>
         <p>Age: {usuario.edad}</p>
-        <p>Location: {ubicacionUsuario}</p>
+        {obtenerLocacion()}
     </div>
 );
 
@@ -42,4 +51,4 @@ var templateDos = (
 var appRoot = document.getElementById('app');
 
 // Render del template
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateDos, appRoot);
