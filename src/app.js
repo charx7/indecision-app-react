@@ -1,20 +1,32 @@
+// Importaciones para me salgan los metodos de react con intelij
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 console.log("App.js corre xD");
 
 // JSX - Javascript XML
 // Crear un objeto de app con titulo/subtitulo
+// Solo renderear el subtitulo y la tag de p si el subtitulo existe - usando &&
+// Renderear una tag de p - si hay items en el array entonces mostrar el tag o "No opciones" usando el terniario con ? con lenght
 var app = {
     titulo: "Indecision App",
-    subtitulo: "SubtituloXD"
+    subtitulo: "SubtituloXD",
+    opciones: [
+        'Uno',
+        'Dos'
+    ]
 };
+
 // Usar titulo/subtitulo en el template
 var template = (
     <div>
         <h1>{app.titulo}</h1>
-            <p>{app.subtitulo}</p>
-                <ol>
-                    <li>Item one</li>
-                    <li>Item two</li>
-                </ol>
+            {app.subtitulo && <p>{app.subtitulo}</p>}
+            {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
+            <ol>
+                <li>Item one</li>
+                <li>Item two</li>
+            </ol>
     </div>
 );
 
@@ -42,7 +54,7 @@ function obtenerLocacion() {
 var templateDos = (
     <div>
         <h1>{usuario.nombre ? usuario.nombre : 'Anonimo'}</h1>
-        <p>Age: {usuario.edad}</p>
+        {(usuario.edad && usuario.edad >= 18) && <p>Edad: {usuario.edad}</p>}
         {obtenerLocacion()}
     </div>
 );
@@ -51,4 +63,4 @@ var templateDos = (
 var appRoot = document.getElementById('app');
 
 // Render del template
-ReactDOM.render(templateDos, appRoot);
+ReactDOM.render(template, appRoot);
