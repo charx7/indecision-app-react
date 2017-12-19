@@ -59,47 +59,62 @@ var template = React.createElement(
 var contador = 0;
 // Funcion que llama el template2 para sumar
 var sumaUno = function sumaUno() {
-    return console.log("suma 1");
-};
-// Otra forma de hacer una funcion arrow
-var restaUno = function restaUno() {
-    console.log("resta1");
-};
-var reset = function reset() {
-    return console.log("reset");
+    contador++;
+    // Llamado a renderear ya que le sumamos uno al contador
+    renderearContador();
 };
 
-var templateDos = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        "Contador: ",
-        contador
-    ),
-    React.createElement(
-        "button",
-        { id: "my-id", className: "boton", onClick: sumaUno },
-        "+1"
-    ),
-    React.createElement(
-        "button",
-        { id: "my-id", className: "boton", onClick: restaUno },
-        "-1"
-    ),
-    React.createElement(
-        "button",
-        { id: "my-id", className: "boton", onClick: reset },
-        "Reset"
-    )
-);
+// Otra forma de hacer una funcion arrow
+var restaUno = function restaUno() {
+    contador--;
+    console.log("resta1");
+    renderearContador();
+};
+
+var reset = function reset() {
+    contador = 0;
+    renderearContador();
+    console.log("reset");
+};
 
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 var appRoot = document.getElementById('app');
 
-// Render del template
-ReactDOM.render(templateDos, appRoot);
+// Renderear el contador
+var renderearContador = function renderearContador() {
+
+    var templateDos = React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h1",
+            null,
+            "Contador: ",
+            contador
+        ),
+        React.createElement(
+            "button",
+            { id: "my-id", className: "boton", onClick: sumaUno },
+            "+1"
+        ),
+        React.createElement(
+            "button",
+            { id: "my-id", className: "boton", onClick: restaUno },
+            "-1"
+        ),
+        React.createElement(
+            "button",
+            { id: "my-id", className: "boton", onClick: reset },
+            "Reset"
+        )
+    );
+
+    // Render del template
+    ReactDOM.render(templateDos, appRoot);
+};
+
+// Llamado a la funcion para que se rendere la pagina
+renderearContador();
 
 // ==============EJERCICIO==================================================================
 // const nombreUsuario = "Carlos Huerta";

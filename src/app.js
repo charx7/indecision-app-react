@@ -33,28 +33,47 @@ const template = (
 // Ejercicio del contador
 let contador = 0;
 // Funcion que llama el template2 para sumar
-const sumaUno = () => console.log("suma 1");
+const sumaUno = () => {
+    contador++;
+    // Llamado a renderear ya que le sumamos uno al contador
+    renderearContador();
+};
+
 // Otra forma de hacer una funcion arrow
 const restaUno = () => {
+    contador--;
     console.log("resta1");
+    renderearContador();
 };
-const reset = () => console.log("reset");
 
-const templateDos = (
-    <div>
-        <h1>Contador: {contador}</h1>
-        <button id="my-id" className="boton" onClick={sumaUno}>+1</button>
-        <button id="my-id" className="boton" onClick={restaUno}>-1</button>
-        <button id="my-id" className="boton" onClick={reset}>Reset</button>
-    </div>
-);
 
+const reset = () => {
+    contador = 0;
+    renderearContador();
+    console.log("reset");
+};
 
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
 
-// Render del template
-ReactDOM.render(templateDos, appRoot);
+// Renderear el contador
+const renderearContador = () => {
+    
+    const templateDos = (
+        <div>
+            <h1>Contador: {contador}</h1>
+            <button id="my-id" className="boton" onClick={sumaUno}>+1</button>
+            <button id="my-id" className="boton" onClick={restaUno}>-1</button>
+            <button id="my-id" className="boton" onClick={reset}>Reset</button>
+        </div>
+    );
+    
+    // Render del template
+    ReactDOM.render(templateDos, appRoot);
+};
+
+// Llamado a la funcion para que se rendere la pagina
+renderearContador();
 
 // ==============EJERCICIO==================================================================
 // const nombreUsuario = "Carlos Huerta";
