@@ -11,40 +11,57 @@ console.log("App.js corre xD");
 const app = {
     titulo: "Indecision App",
     subtitulo: "SubtituloXD",
-    opciones: [
-        'Uno',
-        'Dos'
-    ]
+    opciones: []
 };
 
 // Funcion que se encarga de cargar los eventos de submit de la forma
 const onFormSubmit = (e) => {
     // Hace que no se haga un rendereo completo de la pagina otra vez
     e.preventDefault();
-    console.log("forma submited");
+    // Recuperar el valor que typeo el usuario en el input
+    const opcion = e.target.elements.opcion.value;
+    // Verificamos si hay contenido dentro de la forma
+    if(opcion){
+        // Aniadimos el elemento que se recupero de la forma a las opciones
+        app.opciones.push(opcion);
+        // Hacemos que el elemento que tomamos de la forma sea "" vacio
+        e.target.elements.opcion.value = '';
+        // Hacemos un llamado a la funcion para re-rendereo
+        renderearPaginaJSX();
+    } 
 
 };
-
-// Usar titulo/subtitulo en el template
-const template = (
-    <div>
-        <h1>{app.titulo}</h1>
-            {app.subtitulo && <p>{app.subtitulo}</p>}
-            {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
-            <ol>
-                <li>Item one</li>
-                <li>Item two</li>
-            </ol>
-
-            <form onSubmit={ onFormSubmit }>
-                <input type="text" name="opcion"/>
-                <button>Aniade Opcion</button>
-            </form>
-    </div>
-);
 
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
 
-// Rendereo de la app
-ReactDOM.render(template, appRoot);
+
+// Funcion que renderea la pagina
+const renderearPaginaJSX= () => {
+
+    // Usar titulo/subtitulo en el template
+    const template = (
+        <div>
+            <h1>{app.titulo}</h1>
+                {app.subtitulo && <p>{app.subtitulo}</p>}
+                {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
+                <p>{app.opciones.length}</p>
+                <ol>
+                    <li>Item one</li>
+                    <li>Item two</li>
+                </ol>
+
+                <form onSubmit={ onFormSubmit }>
+                    <input type="text" name="opcion"/>
+                    <button>Aniade Opcion</button>
+                </form>
+        </div>
+    );
+
+    // Rendereo de la app
+    ReactDOM.render(template, appRoot);
+
+};
+
+// Llamado a la funcion para que se rendere la pagina
+renderearPaginaJSX();
