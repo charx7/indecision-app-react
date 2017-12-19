@@ -30,37 +30,57 @@ const template = (
     </div>
 );
 
-
-const nombreUsuario = "Carlos Huerta";
-const edadUsuario = 27;
-const ubicacionUsuario = "Puebla";
-
-const usuario = {
-    nombre: "Charx",
-    edad: 25,
-    ubicacion: "Algun Lugar XD"
+// Ejercicio del contador
+let contador = 0;
+// Funcion que llama el template2 para sumar
+const sumaUno = () => console.log("suma 1");
+// Otra forma de hacer una funcion arrow
+const restaUno = () => {
+    console.log("resta1");
 };
+const reset = () => console.log("reset");
 
-// Funcion que se utiliza para renderear un objeto en el template de JSX condicionalmente
-function obtenerLocacion() {
-    if(usuario.ubicacion != null){
-        return <p>Ubicacion: {usuario.ubicacion}</p>;
-    } else {
-        return undefined;
-    }
-}
-
-// Crear un template variable2 de JSX
 const templateDos = (
     <div>
-        <h1>{usuario.nombre ? usuario.nombre : 'Anonimo'}</h1>
-        {(usuario.edad && usuario.edad >= 18) && <p>Edad: {usuario.edad}</p>}
-        {obtenerLocacion()}
+        <h1>Contador: {contador}</h1>
+        <button id="my-id" className="boton" onClick={sumaUno}>+1</button>
+        <button id="my-id" className="boton" onClick={restaUno}>-1</button>
+        <button id="my-id" className="boton" onClick={reset}>Reset</button>
     </div>
 );
+
 
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
 
 // Render del template
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateDos, appRoot);
+
+// ==============EJERCICIO==================================================================
+// const nombreUsuario = "Carlos Huerta";
+// const edadUsuario = 27;
+// const ubicacionUsuario = "Puebla";
+
+// const usuario = {
+//     nombre: "Charx",
+//     edad: 25,
+//     ubicacion: "Algun Lugar XD"
+// };
+
+// // Funcion que se utiliza para renderear un objeto en el template de JSX condicionalmente
+// function obtenerLocacion() {
+//     if(usuario.ubicacion != null){
+//         return <p>Ubicacion: {usuario.ubicacion}</p>;
+//     } else {
+//         return undefined;
+//     }
+// }
+
+// // Crear un template variable2 de JSX
+// const templateDos = (
+//     <div>
+//         <h1>{usuario.nombre ? usuario.nombre : 'Anonimo'}</h1>
+//         {(usuario.edad && usuario.edad >= 18) && <p>Edad: {usuario.edad}</p>}
+//         {obtenerLocacion()}
+//     </div>
+// );
