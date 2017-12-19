@@ -1,6 +1,6 @@
 // Importaciones para me salgan los metodos de react con intelij
-import React from 'react';
-import ReactDOM from 'react-dom';
+//import React from 'react';
+//import ReactDOM from 'react-dom';
 
 console.log("App.js corre xD");
 
@@ -8,7 +8,7 @@ console.log("App.js corre xD");
 // Crear un objeto de app con titulo/subtitulo
 // Solo renderear el subtitulo y la tag de p si el subtitulo existe - usando &&
 // Renderear una tag de p - si hay items en el array entonces mostrar el tag o "No opciones" usando el terniario con ? con lenght
-var app = {
+const app = {
     titulo: "Indecision App",
     subtitulo: "SubtituloXD",
     opciones: [
@@ -18,7 +18,7 @@ var app = {
 };
 
 // Usar titulo/subtitulo en el template
-var template = (
+const template = (
     <div>
         <h1>{app.titulo}</h1>
             {app.subtitulo && <p>{app.subtitulo}</p>}
@@ -31,11 +31,11 @@ var template = (
 );
 
 
-var nombreUsuario = "Carlos Huerta";
-var edadUsuario = 27;
-var ubicacionUsuario = "Puebla";
+const nombreUsuario = "Carlos Huerta";
+const edadUsuario = 27;
+const ubicacionUsuario = "Puebla";
 
-var usuario = {
+const usuario = {
     nombre: "Charx",
     edad: 25,
     ubicacion: "Algun Lugar XD"
@@ -51,7 +51,7 @@ function obtenerLocacion() {
 }
 
 // Crear un template variable2 de JSX
-var templateDos = (
+const templateDos = (
     <div>
         <h1>{usuario.nombre ? usuario.nombre : 'Anonimo'}</h1>
         {(usuario.edad && usuario.edad >= 18) && <p>Edad: {usuario.edad}</p>}
@@ -60,7 +60,7 @@ var templateDos = (
 );
 
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 // Render del template
 ReactDOM.render(template, appRoot);

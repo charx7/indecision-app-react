@@ -14,5 +14,24 @@ console.log('namelet', nameLet);
 const nameConst = 'Frank';
 console.log('nameConst', nameConst);
 
+// Funcion para definir los Scopes
+function getPetName() {
+    var petName = 'Mi gatito hall';
+    return petName;
+}
 
+// Aunque tengan el mismo nombre no deja acceder por el nivel del scope
+const petName =  getPetName();
+console.log(petName);
 
+// Ejemplo de scope con var, let y const dentro de funciones if for etc
+var fullName = 'Carlos Huerta';
+let firstName;
+
+if(fullName){
+    firstName = fullName.split(' ')[0];
+    console.log(firstName);
+}
+
+// No se puede acceder con const o let solo con var porque son scoped por bloques
+console.log(firstName);
