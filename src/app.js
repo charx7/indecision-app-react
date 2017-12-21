@@ -32,9 +32,16 @@ const onFormSubmit = (e) => {
 
 };
 
+// Logica del boton que limpia el arreglo de opciones
+const reset = () => {
+    // Hace que el arreglo de opciones se vuelva vacio
+    app.opciones = [];
+    // Re-Renderea la pagina
+    renderearPaginaJSX();
+};
+
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
-
 
 // Funcion que renderea la pagina
 const renderearPaginaJSX= () => {
@@ -55,6 +62,7 @@ const renderearPaginaJSX= () => {
                     <input type="text" name="opcion"/>
                     <button>Aniade Opcion</button>
                 </form>
+                <button id="my-id" className="boton" onClick={reset}>Remover Todo</button>
         </div>
     );
 
