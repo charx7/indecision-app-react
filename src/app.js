@@ -43,6 +43,8 @@ const reset = () => {
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
 
+const numbers = [55, 101, 1000];
+
 // Funcion que renderea la pagina
 const renderearPaginaJSX= () => {
 
@@ -54,15 +56,19 @@ const renderearPaginaJSX= () => {
                 {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
                 <p>{app.opciones.length}</p>
                 <ol>
-                    <li>Item one</li>
-                    <li>Item two</li>
+                    {/* Utiliza los elementos del arreglo y la funcion map para renderear una serie de list*/}
+                    {
+                        app.opciones.map((elemento) =>{
+                            return <li key={elemento}>El elemento es: {elemento}</li> ;
+                        })
+                    }
                 </ol>
-
                 <form onSubmit={ onFormSubmit }>
                     <input type="text" name="opcion"/>
                     <button>Aniade Opcion</button>
                 </form>
                 <button id="my-id" className="boton" onClick={reset}>Remover Todo</button>
+                
         </div>
     );
 

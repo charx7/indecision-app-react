@@ -44,6 +44,8 @@ var reset = function reset() {
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 var appRoot = document.getElementById('app');
 
+var numbers = [55, 101, 1000];
+
 // Funcion que renderea la pagina
 var renderearPaginaJSX = function renderearPaginaJSX() {
 
@@ -78,16 +80,14 @@ var renderearPaginaJSX = function renderearPaginaJSX() {
         React.createElement(
             "ol",
             null,
-            React.createElement(
-                "li",
-                null,
-                "Item one"
-            ),
-            React.createElement(
-                "li",
-                null,
-                "Item two"
-            )
+            app.opciones.map(function (elemento) {
+                return React.createElement(
+                    "li",
+                    { key: elemento },
+                    "El elemento es: ",
+                    elemento
+                );
+            })
         ),
         React.createElement(
             "form",
