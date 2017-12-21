@@ -1,87 +1,84 @@
-// Importaciones para me salgan los metodos de react con intelij
-//import React from 'react';
-//import ReactDOM from 'react-dom';
+// Componente padre donde rendearemos todo
+class IndecisionApp extends React.Component {
+    // Rendereo de JSX
+    render() {
+        return (
+            <div>
+                {/* Rendereo del Header definido usando la clase de Header de arriba se deben usar mayusculas para la primera letra*/}
+                <Header/>
+                {/* Rendereamos el componente de Accion */}
+                <Accion />
+                {/* Rendereamos el componente de opciones */}
+                <Opciones />
+                {/* Rendereamos el componente de aniadir opciones */}
+                <AniadeOpcion />
+            </div>
+        );
+    }
+}
 
-console.log("App.js corre xD");
+// Hacemos un componente de Hader extendiendo de la clase componente de react
+class Header extends React.Component {
+    // Metodo para definir obligatorio
+    render() {
+        return (
+            <div>
+                <h1>IndecisionApp</h1>
+                <h2>Deja tu vida en las manos de una compu XD</h2>
+            </div>
+        );
+    }
+}
 
-// JSX - Javascript XML
-// Crear un objeto de app con titulo/subtitulo
-// Solo renderear el subtitulo y la tag de p si el subtitulo existe - usando &&
-// Renderear una tag de p - si hay items en el array entonces mostrar el tag o "No opciones" usando el terniario con ? con lenght
-const app = {
-    titulo: "Indecision App",
-    subtitulo: "SubtituloXD",
-    opciones: []
-};
+// Ahora creamos una clase (componente de react) para procesar un accino
+class Accion extends React.Component {
+    // Metodo Obligatorio
+    render(){
+        return (
+         <div>
+            <button>Que deberia Hacer?</button>
+         </div>   
+        );
+    }
+}
 
-// Funcion que se encarga de cargar los eventos de submit de la forma
-const onFormSubmit = (e) => {
-    // Hace que no se haga un rendereo completo de la pagina otra vez
-    e.preventDefault();
-    // Recuperar el valor que typeo el usuario en el input
-    const opcion = e.target.elements.opcion.value;
-    // Verificamos si hay contenido dentro de la forma
-    if(opcion){
-        // Aniadimos el elemento que se recupero de la forma a las opciones
-        app.opciones.push(opcion);
-        // Hacemos que el elemento que tomamos de la forma sea "" vacio
-        e.target.elements.opcion.value = '';
-        // Hacemos un llamado a la funcion para re-rendereo
-        renderearPaginaJSX();
-    } 
+// Componente que renderea las opciones
+class Opciones extends React.Component {
+    // Metodo Obligatorio del JSX que escupe el componente
+    render(){
+        return (
+            <div>
+                <p>La lista de opciones va aca</p>
+                {/* Rendereo del subcomente opcion*/}
+                <Opcion />
+            </div>
+        );
+    }
+}
 
-};
+// Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
+class Opcion extends React.Component {
+    render() {
+        return (
+            <div>
+                <p>Hola k ase una opcion o k ase</p>
+            </div>
+        );
+    }
+}
 
-// Logica del boton que limpia el arreglo de opciones
-const reset = () => {
-    // Hace que el arreglo de opciones se vuelva vacio
-    app.opciones = [];
-    // Re-Renderea la pagina
-    renderearPaginaJSX();
-};
+// Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
+class AniadeOpcion extends React.Component {
+    // Rendereo del JSX
+    render() {
+        return (
+            <div>
+                <p>Aqui va a ir la forma de aniadir opciones</p>
+            </div>
+        );
+    }
+}
 
-// Funcion que genera un numero aleatorio para tomar un elemento de un arreglo de opciones y despliega
-const tomarDecision = () => {
-    // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-    const randomNum = Math.floor(Math.random() * app.opciones.length);
-    // Lo selecciona del arreglo de opciones
-    const opcionSeleccionada = app.opciones[randomNum];
-    alert(opcionSeleccionada);
-};
 
-// Identifica el documento del DOM del HTML donde se aplciaran los cambios
-const appRoot = document.getElementById('app');
-
-// Funcion que renderea la pagina
-const renderearPaginaJSX= () => {
-
-    // Usar titulo/subtitulo en el template
-    const template = (
-        <div>
-            <h1>{app.titulo}</h1>
-                {app.subtitulo && <p>{app.subtitulo}</p>}
-                {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
-                <button disabled={app.opciones.length === 0} onClick={tomarDecision}>Que deberia hacer?</button>
-                <button id="my-id" className="boton" onClick={reset}>Remover Todo</button>
-                <ol>
-                    {/* Utiliza los elementos del arreglo y la funcion map para renderear una serie de list*/}
-                    {
-                        app.opciones.map((elemento) =>{
-                            return <li key={elemento}>El elemento es: {elemento}</li> ;
-                        })
-                    }
-                </ol>
-                <form onSubmit={ onFormSubmit }>
-                    <input type="text" name="opcion"/>
-                    <button>Aniade Opcion</button>
-                </form>
-        </div>
-    );
-
-    // Rendereo de la app
-    ReactDOM.render(template, appRoot);
-
-};
-
-// Llamado a la funcion para que se rendere la pagina
-renderearPaginaJSX();
+// Rendereo de toda la aplicacion usando el componente padre IndecisionApp
+ReactDOM.render(<IndecisionApp/>, document.getElementById('app'));

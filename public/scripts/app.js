@@ -1,121 +1,207 @@
-"use strict";
+'use strict';
 
-// Importaciones para me salgan los metodos de react con intelij
-//import React from 'react';
-//import ReactDOM from 'react-dom';
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-console.log("App.js corre xD");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// JSX - Javascript XML
-// Crear un objeto de app con titulo/subtitulo
-// Solo renderear el subtitulo y la tag de p si el subtitulo existe - usando &&
-// Renderear una tag de p - si hay items en el array entonces mostrar el tag o "No opciones" usando el terniario con ? con lenght
-var app = {
-    titulo: "Indecision App",
-    subtitulo: "SubtituloXD",
-    opciones: []
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-// Funcion que se encarga de cargar los eventos de submit de la forma
-var onFormSubmit = function onFormSubmit(e) {
-    // Hace que no se haga un rendereo completo de la pagina otra vez
-    e.preventDefault();
-    // Recuperar el valor que typeo el usuario en el input
-    var opcion = e.target.elements.opcion.value;
-    // Verificamos si hay contenido dentro de la forma
-    if (opcion) {
-        // Aniadimos el elemento que se recupero de la forma a las opciones
-        app.opciones.push(opcion);
-        // Hacemos que el elemento que tomamos de la forma sea "" vacio
-        e.target.elements.opcion.value = '';
-        // Hacemos un llamado a la funcion para re-rendereo
-        renderearPaginaJSX();
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Componente padre donde rendearemos todo
+var IndecisionApp = function (_React$Component) {
+    _inherits(IndecisionApp, _React$Component);
+
+    function IndecisionApp() {
+        _classCallCheck(this, IndecisionApp);
+
+        return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
     }
-};
 
-// Logica del boton que limpia el arreglo de opciones
-var reset = function reset() {
-    // Hace que el arreglo de opciones se vuelva vacio
-    app.opciones = [];
-    // Re-Renderea la pagina
-    renderearPaginaJSX();
-};
+    _createClass(IndecisionApp, [{
+        key: 'render',
 
-// Funcion que genera un numero aleatorio para tomar un elemento de un arreglo de opciones y despliega
-var tomarDecision = function tomarDecision() {
-    // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-    var randomNum = Math.floor(Math.random() * app.opciones.length);
-    // Lo selecciona del arreglo de opciones
-    var opcionSeleccionada = app.opciones[randomNum];
-    alert(opcionSeleccionada);
-};
-
-// Identifica el documento del DOM del HTML donde se aplciaran los cambios
-var appRoot = document.getElementById('app');
-
-// Funcion que renderea la pagina
-var renderearPaginaJSX = function renderearPaginaJSX() {
-
-    // Usar titulo/subtitulo en el template
-    var template = React.createElement(
-        "div",
-        null,
-        React.createElement(
-            "h1",
-            null,
-            app.titulo
-        ),
-        app.subtitulo && React.createElement(
-            "p",
-            null,
-            app.subtitulo
-        ),
-        app.opciones.length > 0 ? React.createElement(
-            "p",
-            null,
-            "Sus opciones son"
-        ) : React.createElement(
-            "p",
-            null,
-            "No tiene opciones"
-        ),
-        React.createElement(
-            "button",
-            { disabled: app.opciones.length === 0, onClick: tomarDecision },
-            "Que deberia hacer?"
-        ),
-        React.createElement(
-            "button",
-            { id: "my-id", className: "boton", onClick: reset },
-            "Remover Todo"
-        ),
-        React.createElement(
-            "ol",
-            null,
-            app.opciones.map(function (elemento) {
-                return React.createElement(
-                    "li",
-                    { key: elemento },
-                    "El elemento es: ",
-                    elemento
-                );
-            })
-        ),
-        React.createElement(
-            "form",
-            { onSubmit: onFormSubmit },
-            React.createElement("input", { type: "text", name: "opcion" }),
-            React.createElement(
-                "button",
+        // Rendereo de JSX
+        value: function render() {
+            return React.createElement(
+                'div',
                 null,
-                "Aniade Opcion"
-            )
-        )
-    );
+                React.createElement(Header, null),
+                React.createElement(Accion, null),
+                React.createElement(Opciones, null),
+                React.createElement(AniadeOpcion, null)
+            );
+        }
+    }]);
 
-    // Rendereo de la app
-    ReactDOM.render(template, appRoot);
-};
+    return IndecisionApp;
+}(React.Component);
 
-// Llamado a la funcion para que se rendere la pagina
-renderearPaginaJSX();
+// Hacemos un componente de Hader extendiendo de la clase componente de react
+
+
+var Header = function (_React$Component2) {
+    _inherits(Header, _React$Component2);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
+        key: 'render',
+
+        // Metodo para definir obligatorio
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'IndecisionApp'
+                ),
+                React.createElement(
+                    'h2',
+                    null,
+                    'Deja tu vida en las manos de una compu XD'
+                )
+            );
+        }
+    }]);
+
+    return Header;
+}(React.Component);
+
+// Ahora creamos una clase (componente de react) para procesar un accino
+
+
+var Accion = function (_React$Component3) {
+    _inherits(Accion, _React$Component3);
+
+    function Accion() {
+        _classCallCheck(this, Accion);
+
+        return _possibleConstructorReturn(this, (Accion.__proto__ || Object.getPrototypeOf(Accion)).apply(this, arguments));
+    }
+
+    _createClass(Accion, [{
+        key: 'render',
+
+        // Metodo Obligatorio
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'button',
+                    null,
+                    'Que deberia Hacer?'
+                )
+            );
+        }
+    }]);
+
+    return Accion;
+}(React.Component);
+
+// Componente que renderea las opciones
+
+
+var Opciones = function (_React$Component4) {
+    _inherits(Opciones, _React$Component4);
+
+    function Opciones() {
+        _classCallCheck(this, Opciones);
+
+        return _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).apply(this, arguments));
+    }
+
+    _createClass(Opciones, [{
+        key: 'render',
+
+        // Metodo Obligatorio del JSX que escupe el componente
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'La lista de opciones va aca'
+                ),
+                React.createElement(Opcion, null)
+            );
+        }
+    }]);
+
+    return Opciones;
+}(React.Component);
+
+// Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
+
+
+var Opcion = function (_React$Component5) {
+    _inherits(Opcion, _React$Component5);
+
+    function Opcion() {
+        _classCallCheck(this, Opcion);
+
+        return _possibleConstructorReturn(this, (Opcion.__proto__ || Object.getPrototypeOf(Opcion)).apply(this, arguments));
+    }
+
+    _createClass(Opcion, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'Hola k ase una opcion o k ase'
+                )
+            );
+        }
+    }]);
+
+    return Opcion;
+}(React.Component);
+
+// Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
+
+
+var AniadeOpcion = function (_React$Component6) {
+    _inherits(AniadeOpcion, _React$Component6);
+
+    function AniadeOpcion() {
+        _classCallCheck(this, AniadeOpcion);
+
+        return _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).apply(this, arguments));
+    }
+
+    _createClass(AniadeOpcion, [{
+        key: 'render',
+
+        // Rendereo del JSX
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'Aqui va a ir la forma de aniadir opciones'
+                )
+            );
+        }
+    }]);
+
+    return AniadeOpcion;
+}(React.Component);
+
+// Rendereo de toda la aplicacion usando el componente padre IndecisionApp
+
+
+ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
