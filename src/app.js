@@ -40,10 +40,17 @@ const reset = () => {
     renderearPaginaJSX();
 };
 
+// Funcion que genera un numero aleatorio para tomar un elemento de un arreglo de opciones y despliega
+const tomarDecision = () => {
+    // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+    const randomNum = Math.floor(Math.random() * app.opciones.length);
+    // Lo selecciona del arreglo de opciones
+    const opcionSeleccionada = app.opciones[randomNum];
+    alert(opcionSeleccionada);
+};
+
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 const appRoot = document.getElementById('app');
-
-const numbers = [55, 101, 1000];
 
 // Funcion que renderea la pagina
 const renderearPaginaJSX= () => {
@@ -54,7 +61,8 @@ const renderearPaginaJSX= () => {
             <h1>{app.titulo}</h1>
                 {app.subtitulo && <p>{app.subtitulo}</p>}
                 {app.opciones.length > 0 ? <p>Sus opciones son</p>: <p>No tiene opciones</p> }
-                <p>{app.opciones.length}</p>
+                <button disabled={app.opciones.length === 0} onClick={tomarDecision}>Que deberia hacer?</button>
+                <button id="my-id" className="boton" onClick={reset}>Remover Todo</button>
                 <ol>
                     {/* Utiliza los elementos del arreglo y la funcion map para renderear una serie de list*/}
                     {
@@ -67,8 +75,6 @@ const renderearPaginaJSX= () => {
                     <input type="text" name="opcion"/>
                     <button>Aniade Opcion</button>
                 </form>
-                <button id="my-id" className="boton" onClick={reset}>Remover Todo</button>
-                
         </div>
     );
 

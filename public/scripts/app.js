@@ -41,10 +41,17 @@ var reset = function reset() {
     renderearPaginaJSX();
 };
 
+// Funcion que genera un numero aleatorio para tomar un elemento de un arreglo de opciones y despliega
+var tomarDecision = function tomarDecision() {
+    // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+    var randomNum = Math.floor(Math.random() * app.opciones.length);
+    // Lo selecciona del arreglo de opciones
+    var opcionSeleccionada = app.opciones[randomNum];
+    alert(opcionSeleccionada);
+};
+
 // Identifica el documento del DOM del HTML donde se aplciaran los cambios
 var appRoot = document.getElementById('app');
-
-var numbers = [55, 101, 1000];
 
 // Funcion que renderea la pagina
 var renderearPaginaJSX = function renderearPaginaJSX() {
@@ -73,9 +80,14 @@ var renderearPaginaJSX = function renderearPaginaJSX() {
             "No tiene opciones"
         ),
         React.createElement(
-            "p",
-            null,
-            app.opciones.length
+            "button",
+            { disabled: app.opciones.length === 0, onClick: tomarDecision },
+            "Que deberia hacer?"
+        ),
+        React.createElement(
+            "button",
+            { id: "my-id", className: "boton", onClick: reset },
+            "Remover Todo"
         ),
         React.createElement(
             "ol",
@@ -98,11 +110,6 @@ var renderearPaginaJSX = function renderearPaginaJSX() {
                 null,
                 "Aniade Opcion"
             )
-        ),
-        React.createElement(
-            "button",
-            { id: "my-id", className: "boton", onClick: reset },
-            "Remover Todo"
         )
     );
 
