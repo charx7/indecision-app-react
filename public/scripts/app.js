@@ -111,7 +111,7 @@ var Accion = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    { onClick: this.generaTareaAzar },
+                    { onClick: this.generaTareaAzar.bind(this) },
                     'Que deberia Hacer?'
                 )
             );
@@ -205,12 +205,13 @@ var AniadeOpcion = function (_React$Component6) {
     _createClass(AniadeOpcion, [{
         key: 'onFormSubmit',
 
-        // Metodo que se encarga de ver la logica del submit de la Form
+        // Metodo que se encarga de ver la logica del submit de la Form 
+        // IMPORTANTE la e hace referencia al evento de submit de la forma
         value: function onFormSubmit(e) {
             // Hace que no se haga un rendereo completo de la pagina otra vez
             e.preventDefault();
             // Recuperar el valor que typeo el usuario en el input
-            var opcionAniadir = e.target.elements.opcionNueva.value;
+            var opcionAniadir = e.target.elements.opcionNueva.value.trim();
             if (opcionAniadir) {
                 alert('Quisiste aniadir una opcion');
             }

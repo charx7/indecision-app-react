@@ -50,7 +50,8 @@ class Accion extends React.Component {
     render(){
         return (
          <div>
-            <button onClick={this.generaTareaAzar}>Que deberia Hacer?</button>
+            {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
+            <button onClick={this.generaTareaAzar.bind(this)}>Que deberia Hacer?</button>
          </div>   
         );
     }
@@ -94,12 +95,13 @@ class Opcion extends React.Component {
 
 // Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
 class AniadeOpcion extends React.Component {
-    // Metodo que se encarga de ver la logica del submit de la Form
+    // Metodo que se encarga de ver la logica del submit de la Form 
+    // IMPORTANTE la e hace referencia al evento de submit de la forma
     onFormSubmit (e) {
         // Hace que no se haga un rendereo completo de la pagina otra vez
         e.preventDefault();
         // Recuperar el valor que typeo el usuario en el input
-        const opcionAniadir = e.target.elements.opcionNueva.value;
+        const opcionAniadir = e.target.elements.opcionNueva.value.trim();
         if(opcionAniadir){
             alert('Quisiste aniadir una opcion');
         }
