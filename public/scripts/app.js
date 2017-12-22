@@ -127,18 +127,27 @@ var Accion = function (_React$Component3) {
 var Opciones = function (_React$Component4) {
     _inherits(Opciones, _React$Component4);
 
-    function Opciones() {
+    // Hacemos un Overrride al Constructor de la clase
+    function Opciones(props) {
         _classCallCheck(this, Opciones);
 
-        return _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).apply(this, arguments));
+        // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+        var _this4 = _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).call(this, props));
+        // Llama al constructor de la super clase para que herede los metodos del constructor padre
+
+
+        _this4.borrarTodo = _this4.borrarTodo.bind(_this4);
+        return _this4;
     }
+
+    // Metodo de la clase/componente que remueve las opciones
+
 
     _createClass(Opciones, [{
         key: 'borrarTodo',
-
-        // Metodo de la clase/componente que remueve las opciones
         value: function borrarTodo() {
             alert('Borrars Auch');
+            console.log(this.props.opciones);
         }
 
         // Metodo Obligatorio del JSX que escupe el componente

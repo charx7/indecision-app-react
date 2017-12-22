@@ -59,9 +59,18 @@ class Accion extends React.Component {
 
 // Componente que renderea las opciones
 class Opciones extends React.Component {
+    // Hacemos un Overrride al Constructor de la clase
+    constructor(props) {
+        // Llama al constructor de la super clase para que herede los metodos del constructor padre
+        super(props);
+        // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+        this.borrarTodo = this.borrarTodo.bind(this);
+    } 
+    
     // Metodo de la clase/componente que remueve las opciones
     borrarTodo() {
         alert('Borrars Auch');
+        console.log(this.props.opciones);
     }
 
     // Metodo Obligatorio del JSX que escupe el componente
