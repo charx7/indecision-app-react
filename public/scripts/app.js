@@ -32,7 +32,7 @@ var IndecisionApp = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
-                React.createElement(Accion, null),
+                React.createElement(Accion, { opciones: opcionesProps }),
                 React.createElement(Opciones, { opciones: opcionesProps }),
                 React.createElement(AniadeOpcion, null)
             );
@@ -92,16 +92,26 @@ var Accion = function (_React$Component3) {
     }
 
     _createClass(Accion, [{
-        key: 'render',
+        key: 'generaTareaAzar',
+
+        // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+        value: function generaTareaAzar() {
+            // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+            var randomNum = Math.floor(Math.random() * this.props.opciones.length);
+            console.log(randomNum);
+        }
 
         // Metodo Obligatorio
+
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'button',
-                    null,
+                    { onClick: this.generaTareaAzar },
                     'Que deberia Hacer?'
                 )
             );
@@ -124,20 +134,29 @@ var Opciones = function (_React$Component4) {
     }
 
     _createClass(Opciones, [{
-        key: 'render',
+        key: 'borrarTodo',
+
+        // Metodo de la clase/componente que remueve las opciones
+        value: function borrarTodo() {
+            alert('Borrars Auch');
+        }
 
         // Metodo Obligatorio del JSX que escupe el componente
+
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
-                this.props.opciones.length,
                 React.createElement(
-                    'p',
-                    null,
-                    'La lista de opciones va aca'
+                    'button',
+                    { onClick: this.borrarTodo },
+                    ' Borrar todas la opciones'
                 ),
-                React.createElement(Opcion, null)
+                this.props.opciones.map(function (elemento) {
+                    return React.createElement(Opcion, { key: elemento, currentOpcion: elemento });
+                })
             );
         }
     }]);
@@ -163,11 +182,7 @@ var Opcion = function (_React$Component5) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Hola k ase una opcion o k ase'
-                )
+                this.props.currentOpcion
             );
         }
     }]);
@@ -188,17 +203,36 @@ var AniadeOpcion = function (_React$Component6) {
     }
 
     _createClass(AniadeOpcion, [{
-        key: 'render',
+        key: 'onFormSubmit',
+
+        // Metodo que se encarga de ver la logica del submit de la Form
+        value: function onFormSubmit(e) {
+            // Hace que no se haga un rendereo completo de la pagina otra vez
+            e.preventDefault();
+            // Recuperar el valor que typeo el usuario en el input
+            var opcionAniadir = e.target.elements.opcionNueva.value;
+            if (opcionAniadir) {
+                alert('Quisiste aniadir una opcion');
+            }
+        }
 
         // Rendereo del JSX
+
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
-                    'p',
-                    null,
-                    'Aqui va a ir la forma de aniadir opciones'
+                    'form',
+                    { onSubmit: this.onFormSubmit },
+                    React.createElement('input', { type: 'text', name: 'opcionNueva' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Aniade Opcion'
+                    )
                 )
             );
         }
