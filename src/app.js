@@ -34,13 +34,20 @@ class IndecisionApp extends React.Component {
 
     // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
     metodoAniadeOpcion (opcionNueva) {
-        // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
-        this.setState( (estadoAnterior) => {
-            return {
-                // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
-                opciones: estadoAnterior.opciones.concat([opcionNueva])
-            };
-        });
+        // Verificacion si la opcion nueva que se esta pasando esta en blanco
+        if(!opcionNueva) {
+            return 'Entre un valor valida para aniadir! >:('
+        }   else if (this.state.opciones.indexOf(opcionNueva) > -1) {
+            return 'No puede entrar valores repetidos!! >:(('
+        }   else {
+            // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+            this.setState( (estadoAnterior) => {
+                return {
+                    // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                    opciones: estadoAnterior.opciones.concat([opcionNueva])
+                };
+            });
+        }
     }
 
     // Rendereo de JSX
@@ -167,25 +174,36 @@ class AniadeOpcion extends React.Component {
     constructor (props) {
         super(props);
         this.onFormSubmit = this.onFormSubmit.bind(this);
+        // Introduccion de estado de los componente
+        this.state = {
+            error: undefined
+        };
     }
 
     // Metodo que se encarga de ver la logica del submit de la Form 
     // IMPORTANTE la e hace referencia al evento de submit de la forma
     onFormSubmit (e) {
-         // Hace que no se haga un rendereo completo de la pagina otra vez
-         e.preventDefault();
-         // Recuperar el valor que typeo el usuario en el input
-         const opcionAniadir = e.target.elements.opcionNueva.value.trim();
-         if(opcionAniadir){
-            this.props.metodoAniadeOpcion(opcionAniadir);
-            console.log('Quisiste aniadir una opcion');
-         }
+        // Hace que no se haga un rendereo completo de la pagina otra vez
+        e.preventDefault();
+        // Recuperar el valor que typeo el usuario en el input
+        const opcionAniadir = e.target.elements.opcionNueva.value.trim();
+        // Llama al metodo padre que aniade un opcion al arreglo del estado padre y guarda si hubo un error
+        const error = this.props.metodoAniadeOpcion(opcionAniadir);
+        console.log('Quisiste aniadir una opcion');
+        
+        this.setState( () => {
+            return {
+                error: error
+            };
+        });
      }
 
     // Rendereo del JSX
     render() {
         return (
             <div>
+                {/* Condicionalmente renderea un error si identifico que hubo un error al submitear la forma*/}
+                {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.onFormSubmit}>
                     <input type="text" name="opcionNueva"/>
                     <button>Aniade Opcion</button>

@@ -61,13 +61,20 @@ var IndecisionApp = function (_React$Component) {
     }, {
         key: 'metodoAniadeOpcion',
         value: function metodoAniadeOpcion(opcionNueva) {
-            // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
-            this.setState(function (estadoAnterior) {
-                return {
-                    // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
-                    opciones: estadoAnterior.opciones.concat([opcionNueva])
-                };
-            });
+            // Verificacion si la opcion nueva que se esta pasando esta en blanco
+            if (!opcionNueva) {
+                return 'Entre un valor valida para aniadir! >:(';
+            } else if (this.state.opciones.indexOf(opcionNueva) > -1) {
+                return 'No puede entrar valores repetidos!! >:((';
+            } else {
+                // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+                this.setState(function (estadoAnterior) {
+                    return {
+                        // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                        opciones: estadoAnterior.opciones.concat([opcionNueva])
+                    };
+                });
+            }
         }
 
         // Rendereo de JSX
@@ -272,6 +279,10 @@ var AniadeOpcion = function (_React$Component6) {
         var _this6 = _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).call(this, props));
 
         _this6.onFormSubmit = _this6.onFormSubmit.bind(_this6);
+        // Introduccion de estado de los componente
+        _this6.state = {
+            error: undefined
+        };
         return _this6;
     }
 
@@ -286,10 +297,15 @@ var AniadeOpcion = function (_React$Component6) {
             e.preventDefault();
             // Recuperar el valor que typeo el usuario en el input
             var opcionAniadir = e.target.elements.opcionNueva.value.trim();
-            if (opcionAniadir) {
-                this.props.metodoAniadeOpcion(opcionAniadir);
-                console.log('Quisiste aniadir una opcion');
-            }
+            // Llama al metodo padre que aniade un opcion al arreglo del estado padre y guarda si hubo un error
+            var error = this.props.metodoAniadeOpcion(opcionAniadir);
+            console.log('Quisiste aniadir una opcion');
+
+            this.setState(function () {
+                return {
+                    error: error
+                };
+            });
         }
 
         // Rendereo del JSX
@@ -300,6 +316,11 @@ var AniadeOpcion = function (_React$Component6) {
             return React.createElement(
                 'div',
                 null,
+                this.state.error && React.createElement(
+                    'p',
+                    null,
+                    this.state.error
+                ),
                 React.createElement(
                     'form',
                     { onSubmit: this.onFormSubmit },
