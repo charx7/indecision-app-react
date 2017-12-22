@@ -16,21 +16,37 @@ var IndecisionApp = function (_React$Component) {
     function IndecisionApp(props) {
         _classCallCheck(this, IndecisionApp);
 
-        // Definimos los estados iniciales de las variables
+        // Bindeo del metodo para usar this correctamente
         var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
         // Llamamos al constructor del padre React.Component
 
 
+        _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
+        // Definimos los estados iniciales de las variables
         _this.state = {
             opciones: ['opcion1', 'opcion2', 'opcion3']
         };
         return _this;
     }
 
-    // Rendereo de JSX
+    // Metodo que define borrado de una opcion
 
 
     _createClass(IndecisionApp, [{
+        key: 'metodoBorrarTodoOpciones',
+        value: function metodoBorrarTodoOpciones() {
+            // Funcion que modifica el estado de la app
+            this.setState(function () {
+                // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
+                return {
+                    opciones: []
+                };
+            });
+        }
+
+        // Rendereo de JSX
+
+    }, {
         key: 'render',
         value: function render() {
             // Para titulo dinamico
@@ -41,8 +57,11 @@ var IndecisionApp = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
-                React.createElement(Accion, { opciones: this.state.opciones }),
-                React.createElement(Opciones, { opciones: this.state.opciones }),
+                React.createElement(Accion, { tieneOpciones: this.state.opciones.length > 0, opciones: this.state.opciones }),
+                React.createElement(Opciones, {
+                    opciones: this.state.opciones,
+                    metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones
+                }),
                 React.createElement(AniadeOpcion, null)
             );
         }
@@ -120,7 +139,10 @@ var Accion = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    { onClick: this.generaTareaAzar.bind(this) },
+                    {
+                        onClick: this.generaTareaAzar.bind(this),
+                        disabled: !this.props.tieneOpciones
+                    },
                     'Que deberia Hacer?'
                 )
             );
@@ -136,40 +158,39 @@ var Accion = function (_React$Component3) {
 var Opciones = function (_React$Component4) {
     _inherits(Opciones, _React$Component4);
 
-    // Hacemos un Overrride al Constructor de la clase
-    function Opciones(props) {
+    function Opciones() {
         _classCallCheck(this, Opciones);
 
-        // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
-        var _this4 = _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).call(this, props));
-        // Llama al constructor de la super clase para que herede los metodos del constructor padre
-
-
-        _this4.borrarTodo = _this4.borrarTodo.bind(_this4);
-        return _this4;
+        return _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).apply(this, arguments));
     }
 
-    // Metodo de la clase/componente que remueve las opciones
-
-
     _createClass(Opciones, [{
-        key: 'borrarTodo',
-        value: function borrarTodo() {
-            alert('Borrars Auch');
-            console.log(this.props.opciones);
-        }
+        key: 'render',
+
+        // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
+        // // Hacemos un Overrride al Constructor de la clase
+        // constructor(props) {
+        //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
+        //     super(props);
+        //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+        //     this.borrarTodo = this.borrarTodo.bind(this);
+        // } 
+
+        // // Metodo de la clase/componente que remueve las opciones
+        // borrarTodo() {
+        //     alert('Borrars Auch');
+        //     console.log(this.props.opciones);
+        // }
+
 
         // Metodo Obligatorio del JSX que escupe el componente
-
-    }, {
-        key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'button',
-                    { onClick: this.borrarTodo },
+                    { onClick: this.props.metodoBorrarTodoOpciones },
                     ' Borrar todas la opciones'
                 ),
                 this.props.opciones.map(function (elemento) {

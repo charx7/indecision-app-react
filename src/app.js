@@ -4,10 +4,23 @@ class IndecisionApp extends React.Component {
     constructor(props){
         // Llamamos al constructor del padre React.Component
         super(props);
+        // Bindeo del metodo para usar this correctamente
+        this.metodoBorrarTodoOpciones = this.metodoBorrarTodoOpciones.bind(this);
         // Definimos los estados iniciales de las variables
         this.state = {
             opciones: ['opcion1', 'opcion2','opcion3']
         };
+    }
+
+    // Metodo que define borrado de una opcion
+    metodoBorrarTodoOpciones () {
+        // Funcion que modifica el estado de la app
+        this.setState(() => {
+            // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
+            return {
+                opciones: []
+            }
+        });
     }
 
     // Rendereo de JSX
@@ -22,9 +35,12 @@ class IndecisionApp extends React.Component {
                 y ademas usando props para el titulo y subtitulo*/}
                 <Header titulo={tituloProps} subTitulo={subTituloProps}/>
                 {/* Rendereamos el componente de Accion */}
-                <Accion opciones={this.state.opciones} />
+                <Accion tieneOpciones ={this.state.opciones.length > 0} opciones={this.state.opciones} />
                 {/* Rendereamos el componente de opciones */}
-                <Opciones opciones={this.state.opciones} />
+                <Opciones
+                    opciones={this.state.opciones}
+                    metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
+                />
                 {/* Rendereamos el componente de aniadir opciones */}
                 <AniadeOpcion />
             </div>
@@ -60,7 +76,12 @@ class Accion extends React.Component {
         return (
          <div>
             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
-            <button onClick={this.generaTareaAzar.bind(this)}>Que deberia Hacer?</button>
+            <button
+                 onClick={this.generaTareaAzar.bind(this)}
+                 disabled = {!this.props.tieneOpciones}
+            >
+                Que deberia Hacer?
+            </button>
          </div>   
         );
     }
@@ -68,26 +89,28 @@ class Accion extends React.Component {
 
 // Componente que renderea las opciones
 class Opciones extends React.Component {
-    // Hacemos un Overrride al Constructor de la clase
-    constructor(props) {
-        // Llama al constructor de la super clase para que herede los metodos del constructor padre
-        super(props);
-        // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
-        this.borrarTodo = this.borrarTodo.bind(this);
-    } 
+    // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
+    // // Hacemos un Overrride al Constructor de la clase
+    // constructor(props) {
+    //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
+    //     super(props);
+    //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+    //     this.borrarTodo = this.borrarTodo.bind(this);
+    // } 
     
-    // Metodo de la clase/componente que remueve las opciones
-    borrarTodo() {
-        alert('Borrars Auch');
-        console.log(this.props.opciones);
-    }
+    // // Metodo de la clase/componente que remueve las opciones
+    // borrarTodo() {
+    //     alert('Borrars Auch');
+    //     console.log(this.props.opciones);
+    // }
+
 
     // Metodo Obligatorio del JSX que escupe el componente
     render(){
         return (
             <div>
                 {/* Buton que remueve las opciones*/}
-                <button onClick={this.borrarTodo} > Borrar todas la opciones</button>
+                <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
                 {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
                 Rendereo del subcomente opcion */}
                 {
