@@ -6,6 +6,7 @@ class IndecisionApp extends React.Component {
         super(props);
         // Bindeo del metodo para usar this correctamente
         this.metodoBorrarTodoOpciones = this.metodoBorrarTodoOpciones.bind(this);
+        this.metodoGeneraTareaAzar    = this.metodoGeneraTareaAzar.bind(this);
         // Definimos los estados iniciales de las variables
         this.state = {
             opciones: ['opcion1', 'opcion2','opcion3']
@@ -23,6 +24,13 @@ class IndecisionApp extends React.Component {
         });
     }
 
+    // Metodo que define la eleccion de una opcion al azar
+    metodoGeneraTareaAzar () {
+        // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+        const randomNum = Math.floor(Math.random() * this.state.opciones.length);
+        alert(this.state.opciones[randomNum]);
+    }
+
     // Rendereo de JSX
     render() {
         // Para titulo dinamico
@@ -35,7 +43,11 @@ class IndecisionApp extends React.Component {
                 y ademas usando props para el titulo y subtitulo*/}
                 <Header titulo={tituloProps} subTitulo={subTituloProps}/>
                 {/* Rendereamos el componente de Accion */}
-                <Accion tieneOpciones ={this.state.opciones.length > 0} opciones={this.state.opciones} />
+                <Accion 
+                    tieneOpciones = {this.state.opciones.length > 0}
+                    opciones={this.state.opciones}
+                    metodoGeneraTareaAzar = {this.metodoGeneraTareaAzar}
+                />
                 {/* Rendereamos el componente de opciones */}
                 <Opciones
                     opciones={this.state.opciones}
@@ -64,12 +76,13 @@ class Header extends React.Component {
 
 // Ahora creamos una clase (componente de react) para procesar un accino
 class Accion extends React.Component {
-    // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-    generaTareaAzar()  {
-        // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-        const randomNum = Math.floor(Math.random() * this.props.opciones.length);
-        console.log(randomNum);
-    }
+    // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
+    // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+    // generaTareaAzar()  {
+    //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+    //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
+    //     console.log(randomNum);
+    // }
 
     // Metodo Obligatorio
     render(){
@@ -77,7 +90,7 @@ class Accion extends React.Component {
          <div>
             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
             <button
-                 onClick={this.generaTareaAzar.bind(this)}
+                 onClick={this.props.metodoGeneraTareaAzar}
                  disabled = {!this.props.tieneOpciones}
             >
                 Que deberia Hacer?

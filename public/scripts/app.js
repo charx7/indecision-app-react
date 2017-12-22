@@ -22,6 +22,7 @@ var IndecisionApp = function (_React$Component) {
 
 
         _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
+        _this.metodoGeneraTareaAzar = _this.metodoGeneraTareaAzar.bind(_this);
         // Definimos los estados iniciales de las variables
         _this.state = {
             opciones: ['opcion1', 'opcion2', 'opcion3']
@@ -44,6 +45,16 @@ var IndecisionApp = function (_React$Component) {
             });
         }
 
+        // Metodo que define la eleccion de una opcion al azar
+
+    }, {
+        key: 'metodoGeneraTareaAzar',
+        value: function metodoGeneraTareaAzar() {
+            // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+            var randomNum = Math.floor(Math.random() * this.state.opciones.length);
+            alert(this.state.opciones[randomNum]);
+        }
+
         // Rendereo de JSX
 
     }, {
@@ -57,7 +68,11 @@ var IndecisionApp = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
-                React.createElement(Accion, { tieneOpciones: this.state.opciones.length > 0, opciones: this.state.opciones }),
+                React.createElement(Accion, {
+                    tieneOpciones: this.state.opciones.length > 0,
+                    opciones: this.state.opciones,
+                    metodoGeneraTareaAzar: this.metodoGeneraTareaAzar
+                }),
                 React.createElement(Opciones, {
                     opciones: this.state.opciones,
                     metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones
@@ -120,19 +135,17 @@ var Accion = function (_React$Component3) {
     }
 
     _createClass(Accion, [{
-        key: 'generaTareaAzar',
+        key: 'render',
 
-        // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-        value: function generaTareaAzar() {
-            // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-            var randomNum = Math.floor(Math.random() * this.props.opciones.length);
-            console.log(randomNum);
-        }
+        // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
+        // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+        // generaTareaAzar()  {
+        //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+        //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
+        //     console.log(randomNum);
+        // }
 
         // Metodo Obligatorio
-
-    }, {
-        key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
@@ -140,7 +153,7 @@ var Accion = function (_React$Component3) {
                 React.createElement(
                     'button',
                     {
-                        onClick: this.generaTareaAzar.bind(this),
+                        onClick: this.props.metodoGeneraTareaAzar,
                         disabled: !this.props.tieneOpciones
                     },
                     'Que deberia Hacer?'
