@@ -12,28 +12,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
 
-    function IndecisionApp() {
+    // Establecemos el estado de  la App para poder controlar las variables cambiantes
+    function IndecisionApp(props) {
         _classCallCheck(this, IndecisionApp);
 
-        return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
+        // Definimos los estados iniciales de las variables
+        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+        // Llamamos al constructor del padre React.Component
+
+
+        _this.state = {
+            opciones: ['opcion1', 'opcion2', 'opcion3']
+        };
+        return _this;
     }
+
+    // Rendereo de JSX
+
 
     _createClass(IndecisionApp, [{
         key: 'render',
-
-        // Rendereo de JSX
         value: function render() {
             // Para titulo dinamico
             var tituloProps = 'Indecision-App';
             var subTituloProps = 'Deja tu vida en las manos de una compu XD';
-            var opcionesProps = ["opcion1", "opcion2"];
 
             return React.createElement(
                 'div',
                 null,
                 React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
-                React.createElement(Accion, { opciones: opcionesProps }),
-                React.createElement(Opciones, { opciones: opcionesProps }),
+                React.createElement(Accion, { opciones: this.state.opciones }),
+                React.createElement(Opciones, { opciones: this.state.opciones }),
                 React.createElement(AniadeOpcion, null)
             );
         }

@@ -1,11 +1,20 @@
 // Componente padre donde rendearemos todo
 class IndecisionApp extends React.Component {
+    // Establecemos el estado de  la App para poder controlar las variables cambiantes
+    constructor(props){
+        // Llamamos al constructor del padre React.Component
+        super(props);
+        // Definimos los estados iniciales de las variables
+        this.state = {
+            opciones: ['opcion1', 'opcion2','opcion3']
+        };
+    }
+
     // Rendereo de JSX
     render() {
         // Para titulo dinamico
         const tituloProps = 'Indecision-App';
         const subTituloProps = 'Deja tu vida en las manos de una compu XD';
-        const opcionesProps = ["opcion1", "opcion2"];
 
         return (
             <div>
@@ -13,9 +22,9 @@ class IndecisionApp extends React.Component {
                 y ademas usando props para el titulo y subtitulo*/}
                 <Header titulo={tituloProps} subTitulo={subTituloProps}/>
                 {/* Rendereamos el componente de Accion */}
-                <Accion opciones={opcionesProps} />
+                <Accion opciones={this.state.opciones} />
                 {/* Rendereamos el componente de opciones */}
-                <Opciones opciones={opcionesProps} />
+                <Opciones opciones={this.state.opciones} />
                 {/* Rendereamos el componente de aniadir opciones */}
                 <AniadeOpcion />
             </div>
