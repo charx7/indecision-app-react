@@ -23,12 +23,17 @@ var IndecisionApp = function (_React$Component) {
 
         // Rendereo de JSX
         value: function render() {
+            // Para titulo dinamico
+            var tituloProps = 'Indecision-App';
+            var subTituloProps = 'Deja tu vida en las manos de una compu XD';
+            var opcionesProps = ["opcion1", "opcion2"];
+
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
                 React.createElement(Accion, null),
-                React.createElement(Opciones, null),
+                React.createElement(Opciones, { opciones: opcionesProps }),
                 React.createElement(AniadeOpcion, null)
             );
         }
@@ -60,12 +65,12 @@ var Header = function (_React$Component2) {
                 React.createElement(
                     'h1',
                     null,
-                    'IndecisionApp'
+                    this.props.titulo
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'Deja tu vida en las manos de una compu XD'
+                    this.props.subTitulo
                 )
             );
         }
@@ -126,6 +131,7 @@ var Opciones = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
+                this.props.opciones.length,
                 React.createElement(
                     'p',
                     null,
