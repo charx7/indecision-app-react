@@ -23,6 +23,7 @@ var IndecisionApp = function (_React$Component) {
 
         _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
         _this.metodoGeneraTareaAzar = _this.metodoGeneraTareaAzar.bind(_this);
+        _this.metodoAniadeOpcion = _this.metodoAniadeOpcion.bind(_this);
         // Definimos los estados iniciales de las variables
         _this.state = {
             opciones: ['opcion1', 'opcion2', 'opcion3']
@@ -55,6 +56,20 @@ var IndecisionApp = function (_React$Component) {
             alert(this.state.opciones[randomNum]);
         }
 
+        // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
+
+    }, {
+        key: 'metodoAniadeOpcion',
+        value: function metodoAniadeOpcion(opcionNueva) {
+            // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+            this.setState(function (estadoAnterior) {
+                return {
+                    // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                    opciones: estadoAnterior.opciones.concat([opcionNueva])
+                };
+            });
+        }
+
         // Rendereo de JSX
 
     }, {
@@ -77,7 +92,9 @@ var IndecisionApp = function (_React$Component) {
                     opciones: this.state.opciones,
                     metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones
                 }),
-                React.createElement(AniadeOpcion, null)
+                React.createElement(AniadeOpcion, {
+                    metodoAniadeOpcion: this.metodoAniadeOpcion
+                })
             );
         }
     }]);
@@ -248,24 +265,30 @@ var Opcion = function (_React$Component5) {
 var AniadeOpcion = function (_React$Component6) {
     _inherits(AniadeOpcion, _React$Component6);
 
-    function AniadeOpcion() {
+    // Constructor para poder usar this dentro del metodo onFormSubmit()
+    function AniadeOpcion(props) {
         _classCallCheck(this, AniadeOpcion);
 
-        return _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).call(this, props));
+
+        _this6.onFormSubmit = _this6.onFormSubmit.bind(_this6);
+        return _this6;
     }
+
+    // Metodo que se encarga de ver la logica del submit de la Form 
+    // IMPORTANTE la e hace referencia al evento de submit de la forma
+
 
     _createClass(AniadeOpcion, [{
         key: 'onFormSubmit',
-
-        // Metodo que se encarga de ver la logica del submit de la Form 
-        // IMPORTANTE la e hace referencia al evento de submit de la forma
         value: function onFormSubmit(e) {
             // Hace que no se haga un rendereo completo de la pagina otra vez
             e.preventDefault();
             // Recuperar el valor que typeo el usuario en el input
             var opcionAniadir = e.target.elements.opcionNueva.value.trim();
             if (opcionAniadir) {
-                alert('Quisiste aniadir una opcion');
+                this.props.metodoAniadeOpcion(opcionAniadir);
+                console.log('Quisiste aniadir una opcion');
             }
         }
 

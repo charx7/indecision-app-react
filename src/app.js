@@ -7,6 +7,7 @@ class IndecisionApp extends React.Component {
         // Bindeo del metodo para usar this correctamente
         this.metodoBorrarTodoOpciones = this.metodoBorrarTodoOpciones.bind(this);
         this.metodoGeneraTareaAzar    = this.metodoGeneraTareaAzar.bind(this);
+        this.metodoAniadeOpcion       = this.metodoAniadeOpcion.bind(this);
         // Definimos los estados iniciales de las variables
         this.state = {
             opciones: ['opcion1', 'opcion2','opcion3']
@@ -29,6 +30,17 @@ class IndecisionApp extends React.Component {
         // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
         const randomNum = Math.floor(Math.random() * this.state.opciones.length);
         alert(this.state.opciones[randomNum]);
+    }
+
+    // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
+    metodoAniadeOpcion (opcionNueva) {
+        // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+        this.setState( (estadoAnterior) => {
+            return {
+                // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                opciones: estadoAnterior.opciones.concat([opcionNueva])
+            };
+        });
     }
 
     // Rendereo de JSX
@@ -54,7 +66,9 @@ class IndecisionApp extends React.Component {
                     metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
                 />
                 {/* Rendereamos el componente de aniadir opciones */}
-                <AniadeOpcion />
+                <AniadeOpcion 
+                    metodoAniadeOpcion = {this.metodoAniadeOpcion}
+                />
             </div>
         );
     }
@@ -149,23 +163,30 @@ class Opcion extends React.Component {
 
 // Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
 class AniadeOpcion extends React.Component {
+    // Constructor para poder usar this dentro del metodo onFormSubmit()
+    constructor (props) {
+        super(props);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
     // Metodo que se encarga de ver la logica del submit de la Form 
     // IMPORTANTE la e hace referencia al evento de submit de la forma
     onFormSubmit (e) {
-        // Hace que no se haga un rendereo completo de la pagina otra vez
-        e.preventDefault();
-        // Recuperar el valor que typeo el usuario en el input
-        const opcionAniadir = e.target.elements.opcionNueva.value.trim();
-        if(opcionAniadir){
-            alert('Quisiste aniadir una opcion');
-        }
-    }
+         // Hace que no se haga un rendereo completo de la pagina otra vez
+         e.preventDefault();
+         // Recuperar el valor que typeo el usuario en el input
+         const opcionAniadir = e.target.elements.opcionNueva.value.trim();
+         if(opcionAniadir){
+            this.props.metodoAniadeOpcion(opcionAniadir);
+            console.log('Quisiste aniadir una opcion');
+         }
+     }
 
     // Rendereo del JSX
     render() {
         return (
             <div>
-                <form onSubmit={ this.onFormSubmit }>
+                <form onSubmit={this.onFormSubmit}>
                     <input type="text" name="opcionNueva"/>
                     <button>Aniade Opcion</button>
                 </form>
