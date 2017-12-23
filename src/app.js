@@ -10,7 +10,7 @@ class IndecisionApp extends React.Component {
         this.metodoAniadeOpcion       = this.metodoAniadeOpcion.bind(this);
         // Definimos los estados iniciales de las variables
         this.state = {
-            opciones: ['opcion1', 'opcion2','opcion3']
+            opciones: props.opcionesDefault
         };
     }
 
@@ -60,7 +60,7 @@ class IndecisionApp extends React.Component {
             <div>
                 {/* Rendereo del Header definido usando la clase de Header de arriba se deben usar mayusculas para la primera letra
                 y ademas usando props para el titulo y subtitulo*/}
-                <Header titulo={tituloProps} subTitulo={subTituloProps}/>
+                <Header subTitulo={subTituloProps}/>
                 {/* Rendereamos el componente de Accion */}
                 <Accion 
                     tieneOpciones = {this.state.opciones.length > 0}
@@ -80,6 +80,12 @@ class IndecisionApp extends React.Component {
         );
     }
 }
+
+// Establecemos props default para el componenete indecision-app
+IndecisionApp.defaultProps = {
+    // Establecemos opciones default como arreglo vacio
+    opcionesDefault: []
+};
 
 // // Hacemos un componente de Hader extendiendo de la clase componente de react
 // class Header extends React.Component {
@@ -103,10 +109,17 @@ const Header = (props) =>{
         <div>
             {/* Usando props para mandar una variable de JS al rendereo del componente*/}
             <h1>{props.titulo}</h1>
-            <h2>{props.subTitulo}</h2>
+            {/* Renderio del subtitulo solo si existe*/}
+            {props.subTitulo && <h2>{props.subTitulo}</h2>}
         </div>
     );
 };
+
+// Props de Default para el componente de Header
+Header.defaultProps = {
+    titulo: 'Indecision'
+};
+
 
 // Compenente de Accion como stateless-funcional en lugar de clase
 const Accion = (props) => {
@@ -268,6 +281,5 @@ class AniadeOpcion extends React.Component {
     }
 }
 
-
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
-ReactDOM.render(<IndecisionApp/>, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));

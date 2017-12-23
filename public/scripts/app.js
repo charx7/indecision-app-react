@@ -26,7 +26,7 @@ var IndecisionApp = function (_React$Component) {
         _this.metodoAniadeOpcion = _this.metodoAniadeOpcion.bind(_this);
         // Definimos los estados iniciales de las variables
         _this.state = {
-            opciones: ['opcion1', 'opcion2', 'opcion3']
+            opciones: props.opcionesDefault
         };
         return _this;
     }
@@ -89,7 +89,7 @@ var IndecisionApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, { titulo: tituloProps, subTitulo: subTituloProps }),
+                React.createElement(Header, { subTitulo: subTituloProps }),
                 React.createElement(Accion, {
                     tieneOpciones: this.state.opciones.length > 0,
                     opciones: this.state.opciones,
@@ -109,6 +109,14 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
+// Establecemos props default para el componenete indecision-app
+
+
+IndecisionApp.defaultProps = {
+    // Establecemos opciones default como arreglo vacio
+    opcionesDefault: []
+};
+
 // // Hacemos un componente de Hader extendiendo de la clase componente de react
 // class Header extends React.Component {
 //     // Metodo para definir obligatorio
@@ -124,8 +132,6 @@ var IndecisionApp = function (_React$Component) {
 // }
 
 // Componente de Header como componente funcional sin estado
-
-
 var Header = function Header(props) {
     // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
     // sin hacer referencia a this.props => props
@@ -137,12 +143,17 @@ var Header = function Header(props) {
             null,
             props.titulo
         ),
-        React.createElement(
+        props.subTitulo && React.createElement(
             'h2',
             null,
             props.subTitulo
         )
     );
+};
+
+// Props de Default para el componente de Header
+Header.defaultProps = {
+    titulo: 'Indecision'
 };
 
 // Compenente de Accion como stateless-funcional en lugar de clase
