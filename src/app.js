@@ -81,92 +81,147 @@ class IndecisionApp extends React.Component {
     }
 }
 
-// Hacemos un componente de Hader extendiendo de la clase componente de react
-class Header extends React.Component {
-    // Metodo para definir obligatorio
-    render() {
-        return (
-            <div>
-                {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-                <h1>{this.props.titulo}</h1>
-                <h2>{this.props.subTitulo}</h2>
-            </div>
-        );
-    }
-}
+// // Hacemos un componente de Hader extendiendo de la clase componente de react
+// class Header extends React.Component {
+//     // Metodo para definir obligatorio
+//     render() {
+//         return (
+//             <div>
+//                 {/* Usando props para mandar una variable de JS al rendereo del componente*/}
+//                 <h1>{this.props.titulo}</h1>
+//                 <h2>{this.props.subTitulo}</h2>
+//             </div>
+//         );
+//     }
+// }
 
-// Ahora creamos una clase (componente de react) para procesar un accino
-class Accion extends React.Component {
-    // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
-    // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-    // generaTareaAzar()  {
-    //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-    //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
-    //     console.log(randomNum);
-    // }
+// Componente de Header como componente funcional sin estado
+const Header = (props) =>{
+    // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
+    // sin hacer referencia a this.props => props
+    return (
+        <div>
+            {/* Usando props para mandar una variable de JS al rendereo del componente*/}
+            <h1>{props.titulo}</h1>
+            <h2>{props.subTitulo}</h2>
+        </div>
+    );
+};
 
-    // Metodo Obligatorio
-    render(){
-        return (
-         <div>
+// Compenente de Accion como stateless-funcional en lugar de clase
+const Accion = (props) => {
+    // Codigo que renderea el HTML como returno del componente funcional
+    return (
+        <div>
             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
             <button
-                 onClick={this.props.metodoGeneraTareaAzar}
-                 disabled = {!this.props.tieneOpciones}
-            >
+                onClick={props.metodoGeneraTareaAzar}
+                disabled = {!props.tieneOpciones}
+                >
                 Que deberia Hacer?
             </button>
-         </div>   
-        );
-    }
-}
+        </div>
+    );
+};
 
-// Componente que renderea las opciones
-class Opciones extends React.Component {
-    // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
-    // // Hacemos un Overrride al Constructor de la clase
-    // constructor(props) {
-    //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
-    //     super(props);
-    //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
-    //     this.borrarTodo = this.borrarTodo.bind(this);
-    // } 
+// // Ahora creamos una clase (componente de react) para procesar un accino
+// class Accion extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
+//     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+//     // generaTareaAzar()  {
+//     //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+//     //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
+//     //     console.log(randomNum);
+//     // }
+
+//     // Metodo Obligatorio
+//     render(){
+//         return (
+//          <div>
+//             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
+//             <button
+//                  onClick={this.props.metodoGeneraTareaAzar}
+//                  disabled = {!this.props.tieneOpciones}
+//             >
+//                 Que deberia Hacer?
+//             </button>
+//          </div>   
+//         );
+//     }
+// }
+
+// Componente funcional sin estado de Opciones
+const Opciones = (props) => {
+    return (
+        <div>
+            {/* Buton que remueve las opciones*/}
+            <button onClick={props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+            {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
+            Rendereo del subcomente opcion */}
+            {
+                props.opciones.map((elemento) => {
+                    return <Opcion key={elemento} currentOpcion = {elemento} />
+                })
+            }
+        </div>
+    );
+};
+
+// // Componente que renderea las opciones
+// class Opciones extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
+//     // // Hacemos un Overrride al Constructor de la clase
+//     // constructor(props) {
+//     //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
+//     //     super(props);
+//     //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+//     //     this.borrarTodo = this.borrarTodo.bind(this);
+//     // } 
     
-    // // Metodo de la clase/componente que remueve las opciones
-    // borrarTodo() {
-    //     alert('Borrars Auch');
-    //     console.log(this.props.opciones);
-    // }
+//     // // Metodo de la clase/componente que remueve las opciones
+//     // borrarTodo() {
+//     //     alert('Borrars Auch');
+//     //     console.log(this.props.opciones);
+//     // }
 
 
-    // Metodo Obligatorio del JSX que escupe el componente
-    render(){
-        return (
-            <div>
-                {/* Buton que remueve las opciones*/}
-                <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
-                {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
-                Rendereo del subcomente opcion */}
-                {
-                    this.props.opciones.map((elemento) => {
-                        return <Opcion key={elemento} currentOpcion = {elemento} />
-                    })
-                }
-            </div>
-        );
-    }
-}
+//     // Metodo Obligatorio del JSX que escupe el componente
+//     render(){
+//         return (
+//             <div>
+//                 {/* Buton que remueve las opciones*/}
+//                 <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+//                 {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
+//                 Rendereo del subcomente opcion */}
+//                 {
+//                     this.props.opciones.map((elemento) => {
+//                         return <Opcion key={elemento} currentOpcion = {elemento} />
+//                     })
+//                 }
+//             </div>
+//         );
+//     }
+// }
 
-// Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
-class Opcion extends React.Component {
-    render() {
-        return (
-            <div>
-                {this.props.currentOpcion}
-            </div>
-        );
-    }
-}
+// Componente funcional de una sola opcion
+const Opcion = (props) => {
+    return (
+        <div>
+            {props.currentOpcion}
+        </div>
+    );
+};
+
+// // Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
+// class Opcion extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 {this.props.currentOpcion}
+//             </div>
+//         );
+//     }
+// }
 
 // Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
 class AniadeOpcion extends React.Component {

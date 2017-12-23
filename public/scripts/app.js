@@ -109,181 +109,174 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
-// Hacemos un componente de Hader extendiendo de la clase componente de react
+// // Hacemos un componente de Hader extendiendo de la clase componente de react
+// class Header extends React.Component {
+//     // Metodo para definir obligatorio
+//     render() {
+//         return (
+//             <div>
+//                 {/* Usando props para mandar una variable de JS al rendereo del componente*/}
+//                 <h1>{this.props.titulo}</h1>
+//                 <h2>{this.props.subTitulo}</h2>
+//             </div>
+//         );
+//     }
+// }
+
+// Componente de Header como componente funcional sin estado
 
 
-var Header = function (_React$Component2) {
-    _inherits(Header, _React$Component2);
+var Header = function Header(props) {
+    // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
+    // sin hacer referencia a this.props => props
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            props.titulo
+        ),
+        React.createElement(
+            'h2',
+            null,
+            props.subTitulo
+        )
+    );
+};
 
-    function Header() {
-        _classCallCheck(this, Header);
+// Compenente de Accion como stateless-funcional en lugar de clase
+var Accion = function Accion(props) {
+    // Codigo que renderea el HTML como returno del componente funcional
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            {
+                onClick: props.metodoGeneraTareaAzar,
+                disabled: !props.tieneOpciones
+            },
+            'Que deberia Hacer?'
+        )
+    );
+};
 
-        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-    }
+// // Ahora creamos una clase (componente de react) para procesar un accino
+// class Accion extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
+//     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+//     // generaTareaAzar()  {
+//     //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+//     //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
+//     //     console.log(randomNum);
+//     // }
 
-    _createClass(Header, [{
-        key: 'render',
+//     // Metodo Obligatorio
+//     render(){
+//         return (
+//          <div>
+//             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
+//             <button
+//                  onClick={this.props.metodoGeneraTareaAzar}
+//                  disabled = {!this.props.tieneOpciones}
+//             >
+//                 Que deberia Hacer?
+//             </button>
+//          </div>   
+//         );
+//     }
+// }
 
-        // Metodo para definir obligatorio
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'h1',
-                    null,
-                    this.props.titulo
-                ),
-                React.createElement(
-                    'h2',
-                    null,
-                    this.props.subTitulo
-                )
-            );
-        }
-    }]);
+// Componente funcional sin estado de Opciones
+var Opciones = function Opciones(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: props.metodoBorrarTodoOpciones },
+            ' Borrar todas la opciones'
+        ),
+        props.opciones.map(function (elemento) {
+            return React.createElement(Opcion, { key: elemento, currentOpcion: elemento });
+        })
+    );
+};
 
-    return Header;
-}(React.Component);
+// // Componente que renderea las opciones
+// class Opciones extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
+//     // // Hacemos un Overrride al Constructor de la clase
+//     // constructor(props) {
+//     //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
+//     //     super(props);
+//     //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+//     //     this.borrarTodo = this.borrarTodo.bind(this);
+//     // } 
 
-// Ahora creamos una clase (componente de react) para procesar un accino
-
-
-var Accion = function (_React$Component3) {
-    _inherits(Accion, _React$Component3);
-
-    function Accion() {
-        _classCallCheck(this, Accion);
-
-        return _possibleConstructorReturn(this, (Accion.__proto__ || Object.getPrototypeOf(Accion)).apply(this, arguments));
-    }
-
-    _createClass(Accion, [{
-        key: 'render',
-
-        // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
-        // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-        // generaTareaAzar()  {
-        //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-        //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
-        //     console.log(randomNum);
-        // }
-
-        // Metodo Obligatorio
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'button',
-                    {
-                        onClick: this.props.metodoGeneraTareaAzar,
-                        disabled: !this.props.tieneOpciones
-                    },
-                    'Que deberia Hacer?'
-                )
-            );
-        }
-    }]);
-
-    return Accion;
-}(React.Component);
-
-// Componente que renderea las opciones
-
-
-var Opciones = function (_React$Component4) {
-    _inherits(Opciones, _React$Component4);
-
-    function Opciones() {
-        _classCallCheck(this, Opciones);
-
-        return _possibleConstructorReturn(this, (Opciones.__proto__ || Object.getPrototypeOf(Opciones)).apply(this, arguments));
-    }
-
-    _createClass(Opciones, [{
-        key: 'render',
-
-        // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
-        // // Hacemos un Overrride al Constructor de la clase
-        // constructor(props) {
-        //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
-        //     super(props);
-        //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
-        //     this.borrarTodo = this.borrarTodo.bind(this);
-        // } 
-
-        // // Metodo de la clase/componente que remueve las opciones
-        // borrarTodo() {
-        //     alert('Borrars Auch');
-        //     console.log(this.props.opciones);
-        // }
+//     // // Metodo de la clase/componente que remueve las opciones
+//     // borrarTodo() {
+//     //     alert('Borrars Auch');
+//     //     console.log(this.props.opciones);
+//     // }
 
 
-        // Metodo Obligatorio del JSX que escupe el componente
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'button',
-                    { onClick: this.props.metodoBorrarTodoOpciones },
-                    ' Borrar todas la opciones'
-                ),
-                this.props.opciones.map(function (elemento) {
-                    return React.createElement(Opcion, { key: elemento, currentOpcion: elemento });
-                })
-            );
-        }
-    }]);
+//     // Metodo Obligatorio del JSX que escupe el componente
+//     render(){
+//         return (
+//             <div>
+//                 {/* Buton que remueve las opciones*/}
+//                 <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+//                 {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
+//                 Rendereo del subcomente opcion */}
+//                 {
+//                     this.props.opciones.map((elemento) => {
+//                         return <Opcion key={elemento} currentOpcion = {elemento} />
+//                     })
+//                 }
+//             </div>
+//         );
+//     }
+// }
 
-    return Opciones;
-}(React.Component);
+// Componente funcional de una sola opcion
+var Opcion = function Opcion(props) {
+    return React.createElement(
+        'div',
+        null,
+        props.currentOpcion
+    );
+};
 
-// Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
-
-
-var Opcion = function (_React$Component5) {
-    _inherits(Opcion, _React$Component5);
-
-    function Opcion() {
-        _classCallCheck(this, Opcion);
-
-        return _possibleConstructorReturn(this, (Opcion.__proto__ || Object.getPrototypeOf(Opcion)).apply(this, arguments));
-    }
-
-    _createClass(Opcion, [{
-        key: 'render',
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                this.props.currentOpcion
-            );
-        }
-    }]);
-
-    return Opcion;
-}(React.Component);
+// // Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
+// class Opcion extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 {this.props.currentOpcion}
+//             </div>
+//         );
+//     }
+// }
 
 // Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
 
-
-var AniadeOpcion = function (_React$Component6) {
-    _inherits(AniadeOpcion, _React$Component6);
+var AniadeOpcion = function (_React$Component2) {
+    _inherits(AniadeOpcion, _React$Component2);
 
     // Constructor para poder usar this dentro del metodo onFormSubmit()
     function AniadeOpcion(props) {
         _classCallCheck(this, AniadeOpcion);
 
-        var _this6 = _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (AniadeOpcion.__proto__ || Object.getPrototypeOf(AniadeOpcion)).call(this, props));
 
-        _this6.onFormSubmit = _this6.onFormSubmit.bind(_this6);
+        _this2.onFormSubmit = _this2.onFormSubmit.bind(_this2);
         // Introduccion de estado de los componente
-        _this6.state = {
+        _this2.state = {
             error: undefined
         };
-        return _this6;
+        return _this2;
     }
 
     // Metodo que se encarga de ver la logica del submit de la Form 
