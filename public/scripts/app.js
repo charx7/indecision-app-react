@@ -37,9 +37,16 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'metodoBorrarTodoOpciones',
         value: function metodoBorrarTodoOpciones() {
-            // Funcion que modifica el estado de la app
+            // // Funcion que modifica el estado de la app
+            // this.setState(() => {
+            //     // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
+            //     return {
+            //         opciones: []
+            //     }
+            // });
+
+            // Nueva syntaxis para establecer las opciones en vacio
             this.setState(function () {
-                // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
                 return {
                     opciones: []
                 };
@@ -67,10 +74,18 @@ var IndecisionApp = function (_React$Component) {
             } else if (this.state.opciones.indexOf(opcionNueva) > -1) {
                 return 'No puede entrar valores repetidos!! >:((';
             } else {
-                // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+
+                // // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+                // this.setState( (estadoAnterior) => {
+                //     return {
+                //         // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                //         opciones: estadoAnterior.opciones.concat([opcionNueva])
+                //     };
+                // });
+
+                // Nueva sintaxis para retornar el estador
                 this.setState(function (estadoAnterior) {
                     return {
-                        // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
                         opciones: estadoAnterior.opciones.concat([opcionNueva])
                     };
                 });
@@ -305,6 +320,14 @@ var AniadeOpcion = function (_React$Component2) {
             var error = this.props.metodoAniadeOpcion(opcionAniadir);
             console.log('Quisiste aniadir una opcion');
 
+            // Codigo Viejo para modificar el estado con un error
+            // this.setState( () => {
+            //     return {
+            //         error: error
+            //     };
+            // });
+
+            // Modifica el estado del componente con una funcion de retorno implicito
             this.setState(function () {
                 return {
                     error: error

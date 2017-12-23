@@ -16,13 +16,18 @@ class IndecisionApp extends React.Component {
 
     // Metodo que define borrado de una opcion
     metodoBorrarTodoOpciones () {
-        // Funcion que modifica el estado de la app
-        this.setState(() => {
-            // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
-            return {
-                opciones: []
-            }
-        });
+        // // Funcion que modifica el estado de la app
+        // this.setState(() => {
+        //     // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
+        //     return {
+        //         opciones: []
+        //     }
+        // });
+
+        // Nueva syntaxis para establecer las opciones en vacio
+        this.setState( () => ({
+            opciones: []
+        }));
     }
 
     // Metodo que define la eleccion de una opcion al azar
@@ -40,13 +45,19 @@ class IndecisionApp extends React.Component {
         }   else if (this.state.opciones.indexOf(opcionNueva) > -1) {
             return 'No puede entrar valores repetidos!! >:(('
         }   else {
-            // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
-            this.setState( (estadoAnterior) => {
-                return {
-                    // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
-                    opciones: estadoAnterior.opciones.concat([opcionNueva])
-                };
-            });
+
+            // // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+            // this.setState( (estadoAnterior) => {
+            //     return {
+            //         // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+            //         opciones: estadoAnterior.opciones.concat([opcionNueva])
+            //     };
+            // });
+
+            // Nueva sintaxis para retornar el estador
+            this.setState( (estadoAnterior) => ({
+                opciones: estadoAnterior.opciones.concat([opcionNueva])
+            }));
         }
     }
 
@@ -259,11 +270,17 @@ class AniadeOpcion extends React.Component {
         const error = this.props.metodoAniadeOpcion(opcionAniadir);
         console.log('Quisiste aniadir una opcion');
         
-        this.setState( () => {
-            return {
-                error: error
-            };
-        });
+        // Codigo Viejo para modificar el estado con un error
+        // this.setState( () => {
+        //     return {
+        //         error: error
+        //     };
+        // });
+        
+        // Modifica el estado del componente con una funcion de retorno implicito
+        this.setState( () => ({
+            error: error
+        }));
      }
 
     // Rendereo del JSX
