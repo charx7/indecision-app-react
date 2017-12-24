@@ -6,6 +6,7 @@ import IndecisionApp from './components/IndecisionApp';
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
 
+// Codigo de ejemplo para las nuevas propiedades de clase
 class OldSyntax {
     constructor () {
         this.name = 'Charx';

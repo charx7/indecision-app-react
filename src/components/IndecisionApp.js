@@ -8,21 +8,26 @@ import Opciones from './Opciones';
 
 // Componente padre donde rendearemos todo
 class IndecisionApp extends React.Component {
-    // Establecemos el estado de  la App para poder controlar las variables cambiantes
-    constructor(props){
-        // Llamamos al constructor del padre React.Component
-        super(props);
-        // Bindeo del metodo para usar this correctamente
-        this.metodoBorrarTodoOpciones     = this.metodoBorrarTodoOpciones.bind(this);
-        this.metodoGeneraTareaAzar        = this.metodoGeneraTareaAzar.bind(this);
-        this.metodoAniadeOpcion           = this.metodoAniadeOpcion.bind(this);
-        this.metodoBorrarOpcionIndividual = this.metodoBorrarOpcionIndividual.bind(this);
-        // Definimos los estados iniciales de las variables
-        this.state = {
-            opciones: props.opcionesDefault
-        };
-    }
+    // // Establecemos el estado de  la App para poder controlar las variables cambiantes
+    // constructor(props){
+    //     // Llamamos al constructor del padre React.Component
+    //     super(props);
+    //     // Bindeo del metodo para usar this correctamente
+    //     this.metodoBorrarTodoOpciones     = this.metodoBorrarTodoOpciones.bind(this);
+    //     this.metodoGeneraTareaAzar        = this.metodoGeneraTareaAzar.bind(this);
+    //     this.metodoAniadeOpcion           = this.metodoAniadeOpcion.bind(this);
+    //     this.metodoBorrarOpcionIndividual = this.metodoBorrarOpcionIndividual.bind(this);
+    //     // Definimos los estados iniciales de las variables
+    //     this.state = {
+    //         opciones: props.opcionesDefault
+    //     };
+    // }
     
+    // Nueva manera para indicar el estado del componente
+    state = {
+        opciones: []
+    };
+
     // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
     componentDidMount() {
         console.log('fetching data');
@@ -62,7 +67,7 @@ class IndecisionApp extends React.Component {
     }
 
     // Metodo que define borrado de una opcion
-    metodoBorrarTodoOpciones () {
+    metodoBorrarTodoOpciones = () => {
         // // Funcion que modifica el estado de la app
         // this.setState(() => {
         //     // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
@@ -75,17 +80,17 @@ class IndecisionApp extends React.Component {
         this.setState( () => ({
             opciones: []
         }));
-    }
+    };
 
     // Metodo que define la eleccion de una opcion al azar
-    metodoGeneraTareaAzar () {
+    metodoGeneraTareaAzar = () => {
         // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
         const randomNum = Math.floor(Math.random() * this.state.opciones.length);
         alert(this.state.opciones[randomNum]);
-    }
+    };
 
     // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
-    metodoAniadeOpcion (opcionNueva) {
+    metodoAniadeOpcion = (opcionNueva) => {
         // Verificacion si la opcion nueva que se esta pasando esta en blanco
         if(!opcionNueva) {
             return 'Entre un valor valida para aniadir! >:('
@@ -106,17 +111,17 @@ class IndecisionApp extends React.Component {
                 opciones: estadoAnterior.opciones.concat([opcionNueva])
             }));
         }
-    }
+    };
 
     // Metodo que toma una opcion individual para eliminarla de los estados y del arreglo subsecuentemente
-    metodoBorrarOpcionIndividual (opcionAQuitar) {
+    metodoBorrarOpcionIndividual = (opcionAQuitar) => {
         this.setState( (estadoAnterior) => ({
             opciones: estadoAnterior.opciones.filter( (opcion) => {
                 {/* Verifica si el elemento opcion a quitar esta en el arreglo y cuando lo encuentra devuelve false y lo quita */}
                 return opcionAQuitar !== opcion;
             })
         }));
-    }
+    };
 
     // Rendereo de JSX
     render() {

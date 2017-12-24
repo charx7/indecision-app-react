@@ -5,7 +5,7 @@ export default class AniadeOpcion extends React.Component {
     // Nueva manera de inicializar el estado sin hacer uso del constructor del componente usando un plugin de BABEL
     state = {
         errror: undefined
-    }
+    };
 
     // // Constructor para poder usar this dentro del metodo onFormSubmit()
     // constructor (props) {
