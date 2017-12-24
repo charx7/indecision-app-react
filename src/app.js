@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AniadeOpcion from './components/AniadeOpcion';
+import Opcion from './components/Opcion';
 
 // Componente padre donde rendearemos todo
 class IndecisionApp extends React.Component {
@@ -287,35 +288,6 @@ const Opciones = (props) => {
 //         );
 //     }
 // }
-
-// Componente funcional de una sola opcion
-const Opcion = (props) => {
-    return (
-        <div>
-            {props.currentOpcion}
-            <button 
-                onClick={(e) => {
-                    {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
-                    props.metodoBorrarOpcionIndividual(props.currentOpcion);
-                }}
-            >
-                Eliminar
-            </button>
-        </div>
-    );
-};
-
-// // Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
-// class Opcion extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 {this.props.currentOpcion}
-//             </div>
-//         );
-//     }
-// }
-
 
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));

@@ -954,6 +954,10 @@ var _AniadeOpcion = __webpack_require__(27);
 
 var _AniadeOpcion2 = _interopRequireDefault(_AniadeOpcion);
 
+var _Opcion = __webpack_require__(28);
+
+var _Opcion2 = _interopRequireDefault(_Opcion);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1250,7 +1254,7 @@ var Opciones = function Opciones(props) {
             'Aniada una opcion de cosas que hacer!'
         ),
         props.opciones.map(function (elemento) {
-            return _react2.default.createElement(Opcion, {
+            return _react2.default.createElement(_Opcion2.default, {
                 key: elemento,
                 currentOpcion: elemento,
                 metodoBorrarOpcionIndividual: props.metodoBorrarOpcionIndividual
@@ -1294,37 +1298,6 @@ var Opciones = function Opciones(props) {
 //         );
 //     }
 // }
-
-// Componente funcional de una sola opcion
-var Opcion = function Opcion(props) {
-    return _react2.default.createElement(
-        'div',
-        null,
-        props.currentOpcion,
-        _react2.default.createElement(
-            'button',
-            {
-                onClick: function onClick(e) {
-                    {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
-                    props.metodoBorrarOpcionIndividual(props.currentOpcion);
-                }
-            },
-            'Eliminar'
-        )
-    );
-};
-
-// // Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
-// class Opcion extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 {this.props.currentOpcion}
-//             </div>
-//         );
-//     }
-// }
-
 
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
 _reactDom2.default.render(_react2.default.createElement(IndecisionApp, null), document.getElementById('app'));
@@ -18746,6 +18719,56 @@ var AniadeOpcion = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = AniadeOpcion;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Componente funcional de una sola opcion
+var Opcion = function Opcion(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
+        props.currentOpcion,
+        _react2.default.createElement(
+            'button',
+            {
+                onClick: function onClick(e) {
+                    {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
+                    props.metodoBorrarOpcionIndividual(props.currentOpcion);
+                }
+            },
+            'Eliminar'
+        )
+    );
+};
+
+// Exportaciones
+exports.default = Opcion;
+
+// // Componente de una sola opcion que sera rendereado dentro de la clase de Opciones
+// class Opcion extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 {this.props.currentOpcion}
+//             </div>
+//         );
+//     }
+// }
 
 /***/ })
 /******/ ]);
