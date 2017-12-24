@@ -131,6 +131,15 @@ class IndecisionApp extends React.Component {
         }));
     };
 
+    // Metodo que se encarga de cerrar el modal poniendo el estado de opcionSeleccionada como indefinido
+    metodoCerrarModal = () => {
+        this.setState( (estadoAnterior) => {
+            return ({
+                opcionSeleccionada: undefined
+            })
+        });
+    };
+
     // Rendereo de JSX
     render() {
         // Para titulo dinamico
@@ -161,6 +170,7 @@ class IndecisionApp extends React.Component {
                 {/* Definimos e importamos el Componente third party Modal que es una Alert bonita*/}
                 <OpcionModal 
                     opcionSeleccionada = {this.state.opcionSeleccionada}
+                    metodoCerrarModal = {this.metodoCerrarModal}
                 />
             </div>
         );
