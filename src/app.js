@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import IndecisionApp from './components/IndecisionApp';
-import './styles/styles.css';
+import './styles/styles.scss'; // Importacion de los archivos de CSS
 
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
