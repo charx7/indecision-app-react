@@ -958,6 +958,14 @@ var _Opcion = __webpack_require__(28);
 
 var _Opcion2 = _interopRequireDefault(_Opcion);
 
+var _Header = __webpack_require__(29);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Accion = __webpack_require__(30);
+
+var _Accion2 = _interopRequireDefault(_Accion);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1127,8 +1135,8 @@ var IndecisionApp = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(Header, { subTitulo: subTituloProps }),
-                _react2.default.createElement(Accion, {
+                _react2.default.createElement(_Header2.default, { subTitulo: subTituloProps }),
+                _react2.default.createElement(_Accion2.default, {
                     tieneOpciones: this.state.opciones.length > 0,
                     opciones: this.state.opciones,
                     metodoGeneraTareaAzar: this.metodoGeneraTareaAzar
@@ -1155,88 +1163,6 @@ IndecisionApp.defaultProps = {
     // Establecemos opciones default como arreglo vacio
     opcionesDefault: []
 };
-
-// // Hacemos un componente de Hader extendiendo de la clase componente de react
-// class Header extends React.Component {
-//     // Metodo para definir obligatorio
-//     render() {
-//         return (
-//             <div>
-//                 {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-//                 <h1>{this.props.titulo}</h1>
-//                 <h2>{this.props.subTitulo}</h2>
-//             </div>
-//         );
-//     }
-// }
-
-// Componente de Header como componente funcional sin estado
-var Header = function Header(props) {
-    // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
-    // sin hacer referencia a this.props => props
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'h1',
-            null,
-            props.titulo
-        ),
-        props.subTitulo && _react2.default.createElement(
-            'h2',
-            null,
-            props.subTitulo
-        )
-    );
-};
-
-// Props de Default para el componente de Header
-Header.defaultProps = {
-    titulo: 'Indecision'
-};
-
-// Compenente de Accion como stateless-funcional en lugar de clase
-var Accion = function Accion(props) {
-    // Codigo que renderea el HTML como returno del componente funcional
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'button',
-            {
-                onClick: props.metodoGeneraTareaAzar,
-                disabled: !props.tieneOpciones
-            },
-            'Que deberia Hacer?'
-        )
-    );
-};
-
-// // Ahora creamos una clase (componente de react) para procesar un accion
-// class Accion extends React.Component {
-//     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
-//     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-//     // generaTareaAzar()  {
-//     //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-//     //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
-//     //     console.log(randomNum);
-//     // }
-
-//     // Metodo Obligatorio
-//     render(){
-//         return (
-//          <div>
-//             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
-//             <button
-//                  onClick={this.props.metodoGeneraTareaAzar}
-//                  disabled = {!this.props.tieneOpciones}
-//             >
-//                 Que deberia Hacer?
-//             </button>
-//          </div>   
-//         );
-//     }
-// }
 
 // Componente funcional sin estado de Opciones
 var Opciones = function Opciones(props) {
@@ -18769,6 +18695,128 @@ exports.default = Opcion;
 //         );
 //     }
 // }
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// // Hacemos un componente de Hader extendiendo de la clase componente de react
+// class Header extends React.Component {
+//     // Metodo para definir obligatorio
+//     render() {
+//         return (
+//             <div>
+//                 {/* Usando props para mandar una variable de JS al rendereo del componente*/}
+//                 <h1>{this.props.titulo}</h1>
+//                 <h2>{this.props.subTitulo}</h2>
+//             </div>
+//         );
+//     }
+// }
+
+// Componente de Header como componente funcional sin estado
+var Header = function Header(props) {
+    // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
+    // sin hacer referencia a this.props => props
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'h1',
+            null,
+            props.titulo
+        ),
+        props.subTitulo && _react2.default.createElement(
+            'h2',
+            null,
+            props.subTitulo
+        )
+    );
+};
+
+// Props de Default para el componente de Header
+Header.defaultProps = {
+    titulo: 'Indecision'
+};
+
+// Exportaciones
+exports.default = Header;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Compenente de Accion como stateless-funcional en lugar de clase
+var Accion = function Accion(props) {
+    // Codigo que renderea el HTML como returno del componente funcional
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'button',
+            {
+                onClick: props.metodoGeneraTareaAzar,
+                disabled: !props.tieneOpciones
+            },
+            'Que deberia Hacer?'
+        )
+    );
+};
+
+// // Ahora creamos una clase (componente de react) para procesar un accion
+// class Accion extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
+//     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
+//     // generaTareaAzar()  {
+//     //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+//     //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
+//     //     console.log(randomNum);
+//     // }
+
+//     // Metodo Obligatorio
+//     render(){
+//         return (
+//          <div>
+//             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
+//             <button
+//                  onClick={this.props.metodoGeneraTareaAzar}
+//                  disabled = {!this.props.tieneOpciones}
+//             >
+//                 Que deberia Hacer?
+//             </button>
+//          </div>   
+//         );
+//     }
+// }
+
+// Exportaciones
+exports.default = Accion;
 
 /***/ })
 /******/ ]);

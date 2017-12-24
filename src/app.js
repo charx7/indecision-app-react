@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AniadeOpcion from './components/AniadeOpcion';
 import Opcion from './components/Opcion';
+import Header from './components/Header';
+import Accion from './components/Accion';
 
 // Componente padre donde rendearemos todo
 class IndecisionApp extends React.Component {
@@ -153,82 +155,6 @@ IndecisionApp.defaultProps = {
     // Establecemos opciones default como arreglo vacio
     opcionesDefault: []
 };
-
-// // Hacemos un componente de Hader extendiendo de la clase componente de react
-// class Header extends React.Component {
-//     // Metodo para definir obligatorio
-//     render() {
-//         return (
-//             <div>
-//                 {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-//                 <h1>{this.props.titulo}</h1>
-//                 <h2>{this.props.subTitulo}</h2>
-//             </div>
-//         );
-//     }
-// }
-
-// Componente de Header como componente funcional sin estado
-const Header = (props) =>{
-    // Rendereo del HTML (JSX) en este tipo de componentes se obtiene acceso a los props de manera directa 
-    // sin hacer referencia a this.props => props
-    return (
-        <div>
-            {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-            <h1>{props.titulo}</h1>
-            {/* Renderio del subtitulo solo si existe*/}
-            {props.subTitulo && <h2>{props.subTitulo}</h2>}
-        </div>
-    );
-};
-
-// Props de Default para el componente de Header
-Header.defaultProps = {
-    titulo: 'Indecision'
-};
-
-
-// Compenente de Accion como stateless-funcional en lugar de clase
-const Accion = (props) => {
-    // Codigo que renderea el HTML como returno del componente funcional
-    return (
-        <div>
-            {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
-            <button
-                onClick={props.metodoGeneraTareaAzar}
-                disabled = {!props.tieneOpciones}
-                >
-                Que deberia Hacer?
-            </button>
-        </div>
-    );
-};
-
-// // Ahora creamos una clase (componente de react) para procesar un accion
-// class Accion extends React.Component {
-//     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
-//     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
-//     // generaTareaAzar()  {
-//     //     // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-//     //     const randomNum = Math.floor(Math.random() * this.props.opciones.length);
-//     //     console.log(randomNum);
-//     // }
-
-//     // Metodo Obligatorio
-//     render(){
-//         return (
-//          <div>
-//             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
-//             <button
-//                  onClick={this.props.metodoGeneraTareaAzar}
-//                  disabled = {!this.props.tieneOpciones}
-//             >
-//                 Que deberia Hacer?
-//             </button>
-//          </div>   
-//         );
-//     }
-// }
 
 // Componente funcional sin estado de Opciones
 const Opciones = (props) => {
