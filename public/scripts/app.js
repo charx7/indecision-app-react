@@ -32,10 +32,58 @@ var IndecisionApp = function (_React$Component) {
         return _this;
     }
 
-    // Metodo que define borrado de una opcion
+    // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
 
 
     _createClass(IndecisionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('fetching data');
+
+            try {
+                // Leemos los datos de localStorage
+                var json = localStorage.getItem('opcionesGuardadas');
+                // Los convertimos en un objeto de JS porque son cadenas
+                var opcionesACargar = JSON.parse(json);
+                // Verifica si los datos obtenido de LocalStorage son validos
+                if (opcionesACargar != null) {
+                    // Establece el estado de la app con las opciones cargadas del Local Storage
+                    this.setState(function () {
+                        return { opciones: opcionesACargar };
+                    });
+                }
+            } catch (error) {
+                // Hacer nada XD
+            }
+        }
+
+        // Metodo que se ejecuta cuando algun componente se actualiza ej: valores de estado actualizados
+
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(propAnterior, estadoAnterior) {
+            // Verifica si en estado anterior hubo un cambio en la longitud del arreglo de opciones para salvar los 
+            // cambios a una LocalStorage
+            if (estadoAnterior.opciones.length != this.state.opciones.length) {
+                // Obtenemos un objeto de strings de json del arreglo de opciones del estado de nuestra app
+                var json = JSON.stringify(this.state.opciones);
+                // Lo salvamos a LocalStorage para obtener una persistencia de datos
+                localStorage.setItem('opcionesGuardadas', json);
+                console.log('Si hay cambio en el arreglo opciones');
+            }
+        }
+
+        // Metodo que se ejecuta cuando un componente desaparece de la pantalla
+
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('componente se desmontara');
+        }
+
+        // Metodo que define borrado de una opcion
+
+    }, {
         key: 'metodoBorrarTodoOpciones',
         value: function metodoBorrarTodoOpciones() {
             // // Funcion que modifica el estado de la app
@@ -84,7 +132,7 @@ var IndecisionApp = function (_React$Component) {
                 //     };
                 // });
 
-                // Nueva sintaxis para retornar el estador
+                // Nueva sintaxis para regresar el estador
                 this.setState(function (estadoAnterior) {
                     return {
                         opciones: estadoAnterior.opciones.concat([opcionNueva])
@@ -241,6 +289,11 @@ var Opciones = function Opciones(props) {
             { onClick: props.metodoBorrarTodoOpciones },
             ' Borrar todas la opciones'
         ),
+        props.opciones.length == 0 && React.createElement(
+            'p',
+            null,
+            'Aniada una opcion de cosas que hacer!'
+        ),
         props.opciones.map(function (elemento) {
             return React.createElement(Opcion, {
                 key: elemento,
@@ -364,6 +417,11 @@ var AniadeOpcion = function (_React$Component2) {
                     error: error
                 };
             });
+
+            // Pone en blanco el valor del input para que no sea molesto si no hay error
+            if (!error) {
+                e.target.elements.opcionNueva.value = "";
+            }
         }
 
         // Rendereo del JSX

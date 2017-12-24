@@ -14,6 +14,44 @@ class IndecisionApp extends React.Component {
             opciones: props.opcionesDefault
         };
     }
+    
+    // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
+    componentDidMount() {
+        console.log('fetching data');
+
+        try {
+            // Leemos los datos de localStorage
+            const json = localStorage.getItem('opcionesGuardadas');
+            // Los convertimos en un objeto de JS porque son cadenas
+            const opcionesACargar = JSON.parse(json);
+            // Verifica si los datos obtenido de LocalStorage son validos
+            if(opcionesACargar != null) {
+                // Establece el estado de la app con las opciones cargadas del Local Storage
+                this.setState( () => ({opciones: opcionesACargar}));
+            }
+        } catch(error) {
+            // Hacer nada XD
+        }
+    }
+
+    // Metodo que se ejecuta cuando algun componente se actualiza ej: valores de estado actualizados
+    componentDidUpdate(propAnterior, estadoAnterior) {
+        // Verifica si en estado anterior hubo un cambio en la longitud del arreglo de opciones para salvar los 
+        // cambios a una LocalStorage
+        if(estadoAnterior.opciones.length != this.state.opciones.length ) {
+            // Obtenemos un objeto de strings de json del arreglo de opciones del estado de nuestra app
+            const json = JSON.stringify(this.state.opciones);
+            // Lo salvamos a LocalStorage para obtener una persistencia de datos
+            localStorage.setItem('opcionesGuardadas', json);
+            console.log('Si hay cambio en el arreglo opciones');
+        }
+        
+    }
+
+    // Metodo que se ejecuta cuando un componente desaparece de la pantalla
+    componentWillUnmount () {
+        console.log('componente se desmontara');
+    }
 
     // Metodo que define borrado de una opcion
     metodoBorrarTodoOpciones () {
@@ -55,7 +93,7 @@ class IndecisionApp extends React.Component {
             //     };
             // });
 
-            // Nueva sintaxis para retornar el estador
+            // Nueva sintaxis para regresar el estador
             this.setState( (estadoAnterior) => ({
                 opciones: estadoAnterior.opciones.concat([opcionNueva])
             }));
@@ -192,6 +230,8 @@ const Opciones = (props) => {
         <div>
             {/* Buton que remueve las opciones*/}
             <button onClick={props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+            {/* Parrafo que se renderea cuando las opciones estan vacias*/}
+            {props.opciones.length == 0 && <p>Aniada una opcion de cosas que hacer!</p>}
             {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
             Rendereo del subcomente opcion */}
             {
@@ -305,6 +345,11 @@ class AniadeOpcion extends React.Component {
         this.setState( () => ({
             error: error
         }));
+
+        // Pone en blanco el valor del input para que no sea molesto si no hay error
+        if (!error) {
+            e.target.elements.opcionNueva.value = "";
+        }
      }
 
     // Rendereo del JSX
