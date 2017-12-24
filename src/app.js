@@ -5,9 +5,10 @@ class IndecisionApp extends React.Component {
         // Llamamos al constructor del padre React.Component
         super(props);
         // Bindeo del metodo para usar this correctamente
-        this.metodoBorrarTodoOpciones = this.metodoBorrarTodoOpciones.bind(this);
-        this.metodoGeneraTareaAzar    = this.metodoGeneraTareaAzar.bind(this);
-        this.metodoAniadeOpcion       = this.metodoAniadeOpcion.bind(this);
+        this.metodoBorrarTodoOpciones     = this.metodoBorrarTodoOpciones.bind(this);
+        this.metodoGeneraTareaAzar        = this.metodoGeneraTareaAzar.bind(this);
+        this.metodoAniadeOpcion           = this.metodoAniadeOpcion.bind(this);
+        this.metodoBorrarOpcionIndividual = this.metodoBorrarOpcionIndividual.bind(this);
         // Definimos los estados iniciales de las variables
         this.state = {
             opciones: props.opcionesDefault
@@ -61,6 +62,16 @@ class IndecisionApp extends React.Component {
         }
     }
 
+    // Metodo que toma una opcion individual para eliminarla de los estados y del arreglo subsecuentemente
+    metodoBorrarOpcionIndividual (opcionAQuitar) {
+        this.setState( (estadoAnterior) => ({
+            opciones: estadoAnterior.opciones.filter( (opcion) => {
+                {/* Verifica si el elemento opcion a quitar esta en el arreglo y cuando lo encuentra devuelve false y lo quita */}
+                return opcionAQuitar !== opcion;
+            })
+        }));
+    }
+
     // Rendereo de JSX
     render() {
         // Para titulo dinamico
@@ -82,6 +93,7 @@ class IndecisionApp extends React.Component {
                 <Opciones
                     opciones={this.state.opciones}
                     metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
+                    metodoBorrarOpcionIndividual = {this.metodoBorrarOpcionIndividual}
                 />
                 {/* Rendereamos el componente de aniadir opciones */}
                 <AniadeOpcion 
@@ -148,7 +160,7 @@ const Accion = (props) => {
     );
 };
 
-// // Ahora creamos una clase (componente de react) para procesar un accino
+// // Ahora creamos una clase (componente de react) para procesar un accion
 // class Accion extends React.Component {
 //     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
 //     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
@@ -184,7 +196,11 @@ const Opciones = (props) => {
             Rendereo del subcomente opcion */}
             {
                 props.opciones.map((elemento) => {
-                    return <Opcion key={elemento} currentOpcion = {elemento} />
+                    return <Opcion 
+                        key={elemento} 
+                        currentOpcion = {elemento}
+                        metodoBorrarOpcionIndividual = {props.metodoBorrarOpcionIndividual} 
+                        />
                 })
             }
         </div>
@@ -232,6 +248,14 @@ const Opcion = (props) => {
     return (
         <div>
             {props.currentOpcion}
+            <button 
+                onClick={(e) => {
+                    {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
+                    props.metodoBorrarOpcionIndividual(props.currentOpcion);
+                }}
+            >
+                Eliminar
+            </button>
         </div>
     );
 };
@@ -276,7 +300,7 @@ class AniadeOpcion extends React.Component {
         //         error: error
         //     };
         // });
-        
+
         // Modifica el estado del componente con una funcion de retorno implicito
         this.setState( () => ({
             error: error

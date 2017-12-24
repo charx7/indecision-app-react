@@ -24,6 +24,7 @@ var IndecisionApp = function (_React$Component) {
         _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
         _this.metodoGeneraTareaAzar = _this.metodoGeneraTareaAzar.bind(_this);
         _this.metodoAniadeOpcion = _this.metodoAniadeOpcion.bind(_this);
+        _this.metodoBorrarOpcionIndividual = _this.metodoBorrarOpcionIndividual.bind(_this);
         // Definimos los estados iniciales de las variables
         _this.state = {
             opciones: props.opcionesDefault
@@ -92,6 +93,21 @@ var IndecisionApp = function (_React$Component) {
             }
         }
 
+        // Metodo que toma una opcion individual para eliminarla de los estados y del arreglo subsecuentemente
+
+    }, {
+        key: 'metodoBorrarOpcionIndividual',
+        value: function metodoBorrarOpcionIndividual(opcionAQuitar) {
+            this.setState(function (estadoAnterior) {
+                return {
+                    opciones: estadoAnterior.opciones.filter(function (opcion) {
+                        {/* Verifica si el elemento opcion a quitar esta en el arreglo y cuando lo encuentra devuelve false y lo quita */}
+                        return opcionAQuitar !== opcion;
+                    })
+                };
+            });
+        }
+
         // Rendereo de JSX
 
     }, {
@@ -112,7 +128,8 @@ var IndecisionApp = function (_React$Component) {
                 }),
                 React.createElement(Opciones, {
                     opciones: this.state.opciones,
-                    metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones
+                    metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones,
+                    metodoBorrarOpcionIndividual: this.metodoBorrarOpcionIndividual
                 }),
                 React.createElement(AniadeOpcion, {
                     metodoAniadeOpcion: this.metodoAniadeOpcion
@@ -188,7 +205,7 @@ var Accion = function Accion(props) {
     );
 };
 
-// // Ahora creamos una clase (componente de react) para procesar un accino
+// // Ahora creamos una clase (componente de react) para procesar un accion
 // class Accion extends React.Component {
 //     // CODIGO VIEJO QUE EJEMPLIFICA COMO HACER UNA SELECCION AL AZAR DE UN ELEMENTO DEL ARREGLO PROP OPCIONES
 //     // // Metodo de la clase/componente que genera una tarea aleatoria a realizar
@@ -225,7 +242,11 @@ var Opciones = function Opciones(props) {
             ' Borrar todas la opciones'
         ),
         props.opciones.map(function (elemento) {
-            return React.createElement(Opcion, { key: elemento, currentOpcion: elemento });
+            return React.createElement(Opcion, {
+                key: elemento,
+                currentOpcion: elemento,
+                metodoBorrarOpcionIndividual: props.metodoBorrarOpcionIndividual
+            });
         })
     );
 };
@@ -271,7 +292,17 @@ var Opcion = function Opcion(props) {
     return React.createElement(
         'div',
         null,
-        props.currentOpcion
+        props.currentOpcion,
+        React.createElement(
+            'button',
+            {
+                onClick: function onClick(e) {
+                    {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
+                    props.metodoBorrarOpcionIndividual(props.currentOpcion);
+                }
+            },
+            'Eliminar'
+        )
     );
 };
 
