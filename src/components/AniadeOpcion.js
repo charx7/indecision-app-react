@@ -22,7 +22,6 @@ export default class AniadeOpcion extends React.Component {
         // Llama al metodo padre que aniade un opcion al arreglo del estado padre y guarda si hubo un error
         const error = this.props.metodoAniadeOpcion(opcionAniadir);
         console.log('Quisiste aniadir una opcion');
-        
         // Codigo Viejo para modificar el estado con un error
         // this.setState( () => {
         //     return {
