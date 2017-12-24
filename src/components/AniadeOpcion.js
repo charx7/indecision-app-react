@@ -2,19 +2,25 @@ import React from 'react';
 
 // Componente que renderea la forma con los input y el submit para aniadir opciones que hacer
 export default class AniadeOpcion extends React.Component {
-    // Constructor para poder usar this dentro del metodo onFormSubmit()
-    constructor (props) {
-        super(props);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-        // Introduccion de estado de los componente
-        this.state = {
-            error: undefined
-        };
+    // Nueva manera de inicializar el estado sin hacer uso del constructor del componente usando un plugin de BABEL
+    state = {
+        errror: undefined
     }
+
+    // // Constructor para poder usar this dentro del metodo onFormSubmit()
+    // constructor (props) {
+    //     super(props);
+    //     this.onFormSubmit = this.onFormSubmit.bind(this);
+    //     // // Introduccion de estado de los componente
+    //     // this.state = {
+    //     //     error: undefined
+    //     // };
+    // }
 
     // Metodo que se encarga de ver la logica del submit de la Form 
     // IMPORTANTE la e hace referencia al evento de submit de la forma
-    onFormSubmit (e) {
+    // IMPORTANTE conversion a arrow function para no romper el this binding gracias al nuevo plugin de babel
+    onFormSubmit = (e) => {
         // Hace que no se haga un rendereo completo de la pagina otra vez
         e.preventDefault();
         // Recuperar el valor que typeo el usuario en el input

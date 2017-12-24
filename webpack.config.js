@@ -18,8 +18,12 @@ module.exports = {
             exclude: /node_modules/
         }]
     },
-    devtool: 'cheap-module-eval-source-map'
-
+    // Devtools para debugear sin pasar por el codigo del bundle.js
+    devtool: 'cheap-module-eval-source-map',
+    // Configuracion del WebDevServer como remplazo a live-server
+    devServer: {
+        contentBase: path.join(__dirname,'public')
+    }
 };
 
 
