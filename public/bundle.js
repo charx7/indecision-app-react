@@ -940,8 +940,6 @@ module.exports = focusNode;
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
@@ -950,222 +948,14 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _AniadeOpcion = __webpack_require__(27);
+var _IndecisionApp = __webpack_require__(32);
 
-var _AniadeOpcion2 = _interopRequireDefault(_AniadeOpcion);
-
-var _Header = __webpack_require__(29);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Accion = __webpack_require__(30);
-
-var _Accion2 = _interopRequireDefault(_Accion);
-
-var _Opciones = __webpack_require__(31);
-
-var _Opciones2 = _interopRequireDefault(_Opciones);
+var _IndecisionApp2 = _interopRequireDefault(_IndecisionApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Importaciones de React
-
-
-// Componente padre donde rendearemos todo
-var IndecisionApp = function (_React$Component) {
-    _inherits(IndecisionApp, _React$Component);
-
-    // Establecemos el estado de  la App para poder controlar las variables cambiantes
-    function IndecisionApp(props) {
-        _classCallCheck(this, IndecisionApp);
-
-        // Bindeo del metodo para usar this correctamente
-        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
-        // Llamamos al constructor del padre React.Component
-
-
-        _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
-        _this.metodoGeneraTareaAzar = _this.metodoGeneraTareaAzar.bind(_this);
-        _this.metodoAniadeOpcion = _this.metodoAniadeOpcion.bind(_this);
-        _this.metodoBorrarOpcionIndividual = _this.metodoBorrarOpcionIndividual.bind(_this);
-        // Definimos los estados iniciales de las variables
-        _this.state = {
-            opciones: props.opcionesDefault
-        };
-        return _this;
-    }
-
-    // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
-
-
-    _createClass(IndecisionApp, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log('fetching data');
-
-            try {
-                // Leemos los datos de localStorage
-                var json = localStorage.getItem('opcionesGuardadas');
-                // Los convertimos en un objeto de JS porque son cadenas
-                var opcionesACargar = JSON.parse(json);
-                // Verifica si los datos obtenido de LocalStorage son validos
-                if (opcionesACargar != null) {
-                    // Establece el estado de la app con las opciones cargadas del Local Storage
-                    this.setState(function () {
-                        return { opciones: opcionesACargar };
-                    });
-                }
-            } catch (error) {
-                // Hacer nada XD
-            }
-        }
-
-        // Metodo que se ejecuta cuando algun componente se actualiza ej: valores de estado actualizados
-
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(propAnterior, estadoAnterior) {
-            // Verifica si en estado anterior hubo un cambio en la longitud del arreglo de opciones para salvar los 
-            // cambios a una LocalStorage
-            if (estadoAnterior.opciones.length != this.state.opciones.length) {
-                // Obtenemos un objeto de strings de json del arreglo de opciones del estado de nuestra app
-                var json = JSON.stringify(this.state.opciones);
-                // Lo salvamos a LocalStorage para obtener una persistencia de datos
-                localStorage.setItem('opcionesGuardadas', json);
-                console.log('Si hay cambio en el arreglo opciones');
-            }
-        }
-
-        // Metodo que se ejecuta cuando un componente desaparece de la pantalla
-
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            console.log('componente se desmontara');
-        }
-
-        // Metodo que define borrado de una opcion
-
-    }, {
-        key: 'metodoBorrarTodoOpciones',
-        value: function metodoBorrarTodoOpciones() {
-            // // Funcion que modifica el estado de la app
-            // this.setState(() => {
-            //     // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
-            //     return {
-            //         opciones: []
-            //     }
-            // });
-
-            // Nueva syntaxis para establecer las opciones en vacio
-            this.setState(function () {
-                return {
-                    opciones: []
-                };
-            });
-        }
-
-        // Metodo que define la eleccion de una opcion al azar
-
-    }, {
-        key: 'metodoGeneraTareaAzar',
-        value: function metodoGeneraTareaAzar() {
-            // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
-            var randomNum = Math.floor(Math.random() * this.state.opciones.length);
-            alert(this.state.opciones[randomNum]);
-        }
-
-        // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
-
-    }, {
-        key: 'metodoAniadeOpcion',
-        value: function metodoAniadeOpcion(opcionNueva) {
-            // Verificacion si la opcion nueva que se esta pasando esta en blanco
-            if (!opcionNueva) {
-                return 'Entre un valor valida para aniadir! >:(';
-            } else if (this.state.opciones.indexOf(opcionNueva) > -1) {
-                return 'No puede entrar valores repetidos!! >:((';
-            } else {
-
-                // // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
-                // this.setState( (estadoAnterior) => {
-                //     return {
-                //         // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
-                //         opciones: estadoAnterior.opciones.concat([opcionNueva])
-                //     };
-                // });
-
-                // Nueva sintaxis para regresar el estador
-                this.setState(function (estadoAnterior) {
-                    return {
-                        opciones: estadoAnterior.opciones.concat([opcionNueva])
-                    };
-                });
-            }
-        }
-
-        // Metodo que toma una opcion individual para eliminarla de los estados y del arreglo subsecuentemente
-
-    }, {
-        key: 'metodoBorrarOpcionIndividual',
-        value: function metodoBorrarOpcionIndividual(opcionAQuitar) {
-            this.setState(function (estadoAnterior) {
-                return {
-                    opciones: estadoAnterior.opciones.filter(function (opcion) {
-                        {/* Verifica si el elemento opcion a quitar esta en el arreglo y cuando lo encuentra devuelve false y lo quita */}
-                        return opcionAQuitar !== opcion;
-                    })
-                };
-            });
-        }
-
-        // Rendereo de JSX
-
-    }, {
-        key: 'render',
-        value: function render() {
-            // Para titulo dinamico
-            var tituloProps = 'Indecision-App';
-            var subTituloProps = 'Deja tu vida en las manos de una compu XD';
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(_Header2.default, { subTitulo: subTituloProps }),
-                _react2.default.createElement(_Accion2.default, {
-                    tieneOpciones: this.state.opciones.length > 0,
-                    opciones: this.state.opciones,
-                    metodoGeneraTareaAzar: this.metodoGeneraTareaAzar
-                }),
-                _react2.default.createElement(_Opciones2.default, {
-                    opciones: this.state.opciones,
-                    metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones,
-                    metodoBorrarOpcionIndividual: this.metodoBorrarOpcionIndividual
-                }),
-                _react2.default.createElement(_AniadeOpcion2.default, {
-                    metodoAniadeOpcion: this.metodoAniadeOpcion
-                })
-            );
-        }
-    }]);
-
-    return IndecisionApp;
-}(_react2.default.Component);
-
-// Establecemos props default para el componenete indecision-app
-
-
-IndecisionApp.defaultProps = {
-    // Establecemos opciones default como arreglo vacio
-    opcionesDefault: []
-};
-
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
-_reactDom2.default.render(_react2.default.createElement(IndecisionApp, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_IndecisionApp2.default, null), document.getElementById('app')); // Importaciones de React
 
 /***/ }),
 /* 15 */
@@ -18803,6 +18593,7 @@ var Opciones = function Opciones(props) {
     );
 };
 
+// Exportaciones
 exports.default = Opciones;
 
 // // Componente que renderea las opciones
@@ -18840,6 +18631,240 @@ exports.default = Opciones;
 //         );
 //     }
 // }
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _AniadeOpcion = __webpack_require__(27);
+
+var _AniadeOpcion2 = _interopRequireDefault(_AniadeOpcion);
+
+var _Header = __webpack_require__(29);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Accion = __webpack_require__(30);
+
+var _Accion2 = _interopRequireDefault(_Accion);
+
+var _Opciones = __webpack_require__(31);
+
+var _Opciones2 = _interopRequireDefault(_Opciones);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Importaciones necesarias para la app e importacion de los componentes
+
+
+// Componente padre donde rendearemos todo
+var IndecisionApp = function (_React$Component) {
+    _inherits(IndecisionApp, _React$Component);
+
+    // Establecemos el estado de  la App para poder controlar las variables cambiantes
+    function IndecisionApp(props) {
+        _classCallCheck(this, IndecisionApp);
+
+        // Bindeo del metodo para usar this correctamente
+        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+        // Llamamos al constructor del padre React.Component
+
+
+        _this.metodoBorrarTodoOpciones = _this.metodoBorrarTodoOpciones.bind(_this);
+        _this.metodoGeneraTareaAzar = _this.metodoGeneraTareaAzar.bind(_this);
+        _this.metodoAniadeOpcion = _this.metodoAniadeOpcion.bind(_this);
+        _this.metodoBorrarOpcionIndividual = _this.metodoBorrarOpcionIndividual.bind(_this);
+        // Definimos los estados iniciales de las variables
+        _this.state = {
+            opciones: props.opcionesDefault
+        };
+        return _this;
+    }
+
+    // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
+
+
+    _createClass(IndecisionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('fetching data');
+
+            try {
+                // Leemos los datos de localStorage
+                var json = localStorage.getItem('opcionesGuardadas');
+                // Los convertimos en un objeto de JS porque son cadenas
+                var opcionesACargar = JSON.parse(json);
+                // Verifica si los datos obtenido de LocalStorage son validos
+                if (opcionesACargar != null) {
+                    // Establece el estado de la app con las opciones cargadas del Local Storage
+                    this.setState(function () {
+                        return { opciones: opcionesACargar };
+                    });
+                }
+            } catch (error) {
+                // Hacer nada XD
+            }
+        }
+
+        // Metodo que se ejecuta cuando algun componente se actualiza ej: valores de estado actualizados
+
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(propAnterior, estadoAnterior) {
+            // Verifica si en estado anterior hubo un cambio en la longitud del arreglo de opciones para salvar los 
+            // cambios a una LocalStorage
+            if (estadoAnterior.opciones.length != this.state.opciones.length) {
+                // Obtenemos un objeto de strings de json del arreglo de opciones del estado de nuestra app
+                var json = JSON.stringify(this.state.opciones);
+                // Lo salvamos a LocalStorage para obtener una persistencia de datos
+                localStorage.setItem('opcionesGuardadas', json);
+                console.log('Si hay cambio en el arreglo opciones');
+            }
+        }
+
+        // Metodo que se ejecuta cuando un componente desaparece de la pantalla
+
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('componente se desmontara');
+        }
+
+        // Metodo que define borrado de una opcion
+
+    }, {
+        key: 'metodoBorrarTodoOpciones',
+        value: function metodoBorrarTodoOpciones() {
+            // // Funcion que modifica el estado de la app
+            // this.setState(() => {
+            //     // Valor de regreso es el cambio del estado en este caso el arreglo de opciones en blanco
+            //     return {
+            //         opciones: []
+            //     }
+            // });
+
+            // Nueva syntaxis para establecer las opciones en vacio
+            this.setState(function () {
+                return {
+                    opciones: []
+                };
+            });
+        }
+
+        // Metodo que define la eleccion de una opcion al azar
+
+    }, {
+        key: 'metodoGeneraTareaAzar',
+        value: function metodoGeneraTareaAzar() {
+            // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
+            var randomNum = Math.floor(Math.random() * this.state.opciones.length);
+            alert(this.state.opciones[randomNum]);
+        }
+
+        // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
+
+    }, {
+        key: 'metodoAniadeOpcion',
+        value: function metodoAniadeOpcion(opcionNueva) {
+            // Verificacion si la opcion nueva que se esta pasando esta en blanco
+            if (!opcionNueva) {
+                return 'Entre un valor valida para aniadir! >:(';
+            } else if (this.state.opciones.indexOf(opcionNueva) > -1) {
+                return 'No puede entrar valores repetidos!! >:((';
+            } else {
+
+                // // Modificacion del estado de la app recuperando el estado anterior con el argumento estadoAnterior de la funcion
+                // this.setState( (estadoAnterior) => {
+                //     return {
+                //         // Pusheamos la opcion nueva usando concat sin manipular los estados inicial o anterior
+                //         opciones: estadoAnterior.opciones.concat([opcionNueva])
+                //     };
+                // });
+
+                // Nueva sintaxis para regresar el estador
+                this.setState(function (estadoAnterior) {
+                    return {
+                        opciones: estadoAnterior.opciones.concat([opcionNueva])
+                    };
+                });
+            }
+        }
+
+        // Metodo que toma una opcion individual para eliminarla de los estados y del arreglo subsecuentemente
+
+    }, {
+        key: 'metodoBorrarOpcionIndividual',
+        value: function metodoBorrarOpcionIndividual(opcionAQuitar) {
+            this.setState(function (estadoAnterior) {
+                return {
+                    opciones: estadoAnterior.opciones.filter(function (opcion) {
+                        {/* Verifica si el elemento opcion a quitar esta en el arreglo y cuando lo encuentra devuelve false y lo quita */}
+                        return opcionAQuitar !== opcion;
+                    })
+                };
+            });
+        }
+
+        // Rendereo de JSX
+
+    }, {
+        key: 'render',
+        value: function render() {
+            // Para titulo dinamico
+            var tituloProps = 'Indecision-App';
+            var subTituloProps = 'Deja tu vida en las manos de una compu XD';
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_Header2.default, { subTitulo: subTituloProps }),
+                _react2.default.createElement(_Accion2.default, {
+                    tieneOpciones: this.state.opciones.length > 0,
+                    opciones: this.state.opciones,
+                    metodoGeneraTareaAzar: this.metodoGeneraTareaAzar
+                }),
+                _react2.default.createElement(_Opciones2.default, {
+                    opciones: this.state.opciones,
+                    metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones,
+                    metodoBorrarOpcionIndividual: this.metodoBorrarOpcionIndividual
+                }),
+                _react2.default.createElement(_AniadeOpcion2.default, {
+                    metodoAniadeOpcion: this.metodoAniadeOpcion
+                })
+            );
+        }
+    }]);
+
+    return IndecisionApp;
+}(_react2.default.Component);
+
+// Establecemos props default para el componenete indecision-app
+
+
+IndecisionApp.defaultProps = {
+    // Establecemos opciones default como arreglo vacio
+    opcionesDefault: []
+};
+
+// Exportaciones
+exports.default = IndecisionApp;
 
 /***/ })
 /******/ ]);

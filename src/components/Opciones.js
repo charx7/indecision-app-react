@@ -24,6 +24,7 @@ const Opciones = (props) => {
     );
 };
 
+// Exportaciones
 export default Opciones;
 
 // // Componente que renderea las opciones
