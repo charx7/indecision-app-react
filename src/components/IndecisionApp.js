@@ -4,6 +4,7 @@ import AniadeOpcion from './AniadeOpcion';
 import Header from './Header';
 import Accion from './Accion';
 import Opciones from './Opciones';
+import OpcionModal from './OpcionModal';
 
 
 // Componente padre donde rendearemos todo
@@ -25,7 +26,8 @@ class IndecisionApp extends React.Component {
     
     // Nueva manera para indicar el estado del componente
     state = {
-        opciones: []
+        opciones: [],
+        opcionSeleccionada: undefined
     };
 
     // Metodo que se ejecuta al iniciar la aplicacion (Metodos de ciclo de vida)
@@ -149,6 +151,10 @@ class IndecisionApp extends React.Component {
                 {/* Rendereamos el componente de aniadir opciones */}
                 <AniadeOpcion 
                     metodoAniadeOpcion = {this.metodoAniadeOpcion}
+                />
+                {/* Definimos e importamos el Componente third party Modal que es una Alert bonita*/}
+                <OpcionModal 
+                    opcionSeleccionada = {this.state.opcionSeleccionada}
                 />
             </div>
         );
