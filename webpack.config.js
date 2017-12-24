@@ -8,5 +8,16 @@ module.exports = {
     output: {
         path: path.join(__dirname,'public'),
         filename: 'bundle.js'
+    },
+    // Configuracion del loader
+    module: {
+        rules: [{
+            loader: 'babel-loader',
+            // verifica si el archivo termina en .js para correr el babel-loader
+            test: /\.js$/,
+            exclude: /node_modules/
+        }]
     }
 };
+
+

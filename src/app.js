@@ -2,5 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const template = React.createElement('p', {}, 'ola k ase');
+const template = <p>Ola k ase</p>;
+// Decimos que componente va a renderear React y usando que elemento de nuestro html index
 ReactDOM.render(template, document.getElementById('app'));
