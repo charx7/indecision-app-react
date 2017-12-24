@@ -954,10 +954,6 @@ var _AniadeOpcion = __webpack_require__(27);
 
 var _AniadeOpcion2 = _interopRequireDefault(_AniadeOpcion);
 
-var _Opcion = __webpack_require__(28);
-
-var _Opcion2 = _interopRequireDefault(_Opcion);
-
 var _Header = __webpack_require__(29);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -965,6 +961,10 @@ var _Header2 = _interopRequireDefault(_Header);
 var _Accion = __webpack_require__(30);
 
 var _Accion2 = _interopRequireDefault(_Accion);
+
+var _Opciones = __webpack_require__(31);
+
+var _Opciones2 = _interopRequireDefault(_Opciones);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1141,7 +1141,7 @@ var IndecisionApp = function (_React$Component) {
                     opciones: this.state.opciones,
                     metodoGeneraTareaAzar: this.metodoGeneraTareaAzar
                 }),
-                _react2.default.createElement(Opciones, {
+                _react2.default.createElement(_Opciones2.default, {
                     opciones: this.state.opciones,
                     metodoBorrarTodoOpciones: this.metodoBorrarTodoOpciones,
                     metodoBorrarOpcionIndividual: this.metodoBorrarOpcionIndividual
@@ -1163,67 +1163,6 @@ IndecisionApp.defaultProps = {
     // Establecemos opciones default como arreglo vacio
     opcionesDefault: []
 };
-
-// Componente funcional sin estado de Opciones
-var Opciones = function Opciones(props) {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'button',
-            { onClick: props.metodoBorrarTodoOpciones },
-            ' Borrar todas la opciones'
-        ),
-        props.opciones.length == 0 && _react2.default.createElement(
-            'p',
-            null,
-            'Aniada una opcion de cosas que hacer!'
-        ),
-        props.opciones.map(function (elemento) {
-            return _react2.default.createElement(_Opcion2.default, {
-                key: elemento,
-                currentOpcion: elemento,
-                metodoBorrarOpcionIndividual: props.metodoBorrarOpcionIndividual
-            });
-        })
-    );
-};
-
-// // Componente que renderea las opciones
-// class Opciones extends React.Component {
-//     // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
-//     // // Hacemos un Overrride al Constructor de la clase
-//     // constructor(props) {
-//     //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
-//     //     super(props);
-//     //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
-//     //     this.borrarTodo = this.borrarTodo.bind(this);
-//     // } 
-
-//     // // Metodo de la clase/componente que remueve las opciones
-//     // borrarTodo() {
-//     //     alert('Borrars Auch');
-//     //     console.log(this.props.opciones);
-//     // }
-
-
-//     // Metodo Obligatorio del JSX que escupe el componente
-//     render(){
-//         return (
-//             <div>
-//                 {/* Buton que remueve las opciones*/}
-//                 <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
-//                 {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
-//                 Rendereo del subcomente opcion */}
-//                 {
-//                     this.props.opciones.map((elemento) => {
-//                         return <Opcion key={elemento} currentOpcion = {elemento} />
-//                     })
-//                 }
-//             </div>
-//         );
-//     }
-// }
 
 // Rendereo de toda la aplicacion usando el componente padre IndecisionApp
 _reactDom2.default.render(_react2.default.createElement(IndecisionApp, null), document.getElementById('app'));
@@ -18817,6 +18756,90 @@ var Accion = function Accion(props) {
 
 // Exportaciones
 exports.default = Accion;
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Opcion = __webpack_require__(28);
+
+var _Opcion2 = _interopRequireDefault(_Opcion);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Componente funcional sin estado de Opciones
+var Opciones = function Opciones(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'button',
+            { onClick: props.metodoBorrarTodoOpciones },
+            ' Borrar todas la opciones'
+        ),
+        props.opciones.length == 0 && _react2.default.createElement(
+            'p',
+            null,
+            'Aniada una opcion de cosas que hacer!'
+        ),
+        props.opciones.map(function (elemento) {
+            return _react2.default.createElement(_Opcion2.default, {
+                key: elemento,
+                currentOpcion: elemento,
+                metodoBorrarOpcionIndividual: props.metodoBorrarOpcionIndividual
+            });
+        })
+    );
+};
+
+exports.default = Opciones;
+
+// // Componente que renderea las opciones
+// class Opciones extends React.Component {
+//     // CODIGO VIEJO QUE EJEMPLIFICA COMO BINDEAR LOS METODOS PARA USAR THIS
+//     // // Hacemos un Overrride al Constructor de la clase
+//     // constructor(props) {
+//     //     // Llama al constructor de la super clase para que herede los metodos del constructor padre
+//     //     super(props);
+//     //     // Corregir el contexto para llamar al objeto this en los metodos de la clase/componente
+//     //     this.borrarTodo = this.borrarTodo.bind(this);
+//     // } 
+
+//     // // Metodo de la clase/componente que remueve las opciones
+//     // borrarTodo() {
+//     //     alert('Borrars Auch');
+//     //     console.log(this.props.opciones);
+//     // }
+
+
+//     // Metodo Obligatorio del JSX que escupe el componente
+//     render(){
+//         return (
+//             <div>
+//                 {/* Buton que remueve las opciones*/}
+//                 <button onClick={this.props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+//                 {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
+//                 Rendereo del subcomente opcion */}
+//                 {
+//                     this.props.opciones.map((elemento) => {
+//                         return <Opcion key={elemento} currentOpcion = {elemento} />
+//                     })
+//                 }
+//             </div>
+//         );
+//     }
+// }
 
 /***/ })
 /******/ ]);
