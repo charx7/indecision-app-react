@@ -8,7 +8,7 @@ const OpcionModal = (props) => {
     /* Caracteristicas/props necesarias para que sirva*/
     return (
        <Modal
-            isOpen= {false}
+            isOpen= {!!props.opcionSeleccionada}
             contentLabel = "Opcion Seleccionada"
        >
             <h3>Opcion Seleccionada</h3>

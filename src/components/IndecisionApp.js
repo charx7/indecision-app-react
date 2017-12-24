@@ -88,7 +88,13 @@ class IndecisionApp extends React.Component {
     metodoGeneraTareaAzar = () => {
         // Genera numero aleatorio entre 0 y n - 1 del lenght del arreglo de opciones 
         const randomNum = Math.floor(Math.random() * this.state.opciones.length);
-        alert(this.state.opciones[randomNum]);
+        const opcionDesplegar = this.state.opciones[randomNum];
+        // Establece cual fue la opcion seleccionada para que la alert de Modal se despliegue
+        this.setState( (estadoAnterior) => {
+            return({
+                opcionSeleccionada: opcionDesplegar
+            })
+        });
     };
 
     // Metodo que se encarga de definir la opcion para aniadir que extrae del input de la form
