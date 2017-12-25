@@ -1,0 +1,8 @@
+// Centrar las cosas
+.container {
+    max-width: 60rem;
+    // Para centrar igualmente en left y right
+    margin: 0 auto;
+    padding: 0 $m-size;
+}
+

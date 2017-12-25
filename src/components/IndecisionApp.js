@@ -151,22 +151,24 @@ class IndecisionApp extends React.Component {
                 {/* Rendereo del Header definido usando la clase de Header de arriba se deben usar mayusculas para la primera letra
                 y ademas usando props para el titulo y subtitulo*/}
                 <Header subTitulo={subTituloProps}/>
-                {/* Rendereamos el componente de Accion */}
-                <Accion 
-                    tieneOpciones = {this.state.opciones.length > 0}
-                    opciones={this.state.opciones}
-                    metodoGeneraTareaAzar = {this.metodoGeneraTareaAzar}
-                />
-                {/* Rendereamos el componente de opciones */}
-                <Opciones
-                    opciones={this.state.opciones}
-                    metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
-                    metodoBorrarOpcionIndividual = {this.metodoBorrarOpcionIndividual}
-                />
-                {/* Rendereamos el componente de aniadir opciones */}
-                <AniadeOpcion 
-                    metodoAniadeOpcion = {this.metodoAniadeOpcion}
-                />
+                <div className="container">
+                    {/* Rendereamos el componente de Accion */}
+                    <Accion 
+                        tieneOpciones = {this.state.opciones.length > 0}
+                        opciones={this.state.opciones}
+                        metodoGeneraTareaAzar = {this.metodoGeneraTareaAzar}
+                    />
+                    {/* Rendereamos el componente de opciones */}
+                    <Opciones
+                        opciones={this.state.opciones}
+                        metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
+                        metodoBorrarOpcionIndividual = {this.metodoBorrarOpcionIndividual}
+                    />
+                    {/* Rendereamos el componente de aniadir opciones */}
+                    <AniadeOpcion 
+                        metodoAniadeOpcion = {this.metodoAniadeOpcion}
+                    />
+                </div>
                 {/* Definimos e importamos el Componente third party Modal que es una Alert bonita*/}
                 <OpcionModal 
                     opcionSeleccionada = {this.state.opcionSeleccionada}

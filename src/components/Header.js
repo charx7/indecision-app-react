@@ -20,10 +20,12 @@ const Header = (props) =>{
     // sin hacer referencia a this.props => props
     return (
         <div className= "header">
-            {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-            <h1 className = "header__titulo">{props.titulo}</h1>
-            {/* Renderio del subtitulo solo si existe*/}
-            {props.subTitulo && <h2 className = "header__subtitulo">{props.subTitulo}</h2>}
+            <div className="container">
+                {/* Usando props para mandar una variable de JS al rendereo del componente*/}
+                <h1 className = "header__titulo">{props.titulo}</h1>
+                {/* Renderio del subtitulo solo si existe*/}
+                {props.subTitulo && <h2 className = "header__subtitulo">{props.subTitulo}</h2>}
+            </div>
         </div>
     );
 };
