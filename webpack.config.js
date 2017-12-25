@@ -19,7 +19,7 @@ module.exports = {
             exclude: /node_modules/
         }, {
             //Reglas para seleccionar todos los archivos que terminan en .scss y se tranformen
-            test: /\.scss$/,
+            test: /\.s?css$/,
             // Establecemos los loaders de SCSS que convierten en CSS
             use: [
                 'style-loader',
