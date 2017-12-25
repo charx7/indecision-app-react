@@ -1,0 +1,15 @@
+.opcion {
+    // Para distribuir tipo BS
+    display: flex;
+    justify-content: space-between;
+    color: $off-white;
+    // Para centrars
+    padding: $l-size $m-size;
+    border-bottom: 1px solid lighten($color: $light-blue, $amount: 10%);
+}
+
+.opcion-elemento {
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0;
+}

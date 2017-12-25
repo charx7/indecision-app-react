@@ -3,8 +3,10 @@ import React from 'react';
 // Componente funcional de una sola opcion
 const Opcion = (props) => {
     return (
-        <div>
-            {props.currentOpcion}
+        <div className='opcion'>
+            <p className='opcion-elemento'>
+                {props.contador}. {props.currentOpcion}
+            </p>
             <button
                 className='botones botones--link' 
                 onClick={(e) => {

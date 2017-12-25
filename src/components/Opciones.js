@@ -21,10 +21,11 @@ const Opciones = (props) => {
             {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente
             Rendereo del subcomente opcion */}
             {
-                props.opciones.map((elemento) => {
+                props.opciones.map((elemento, index) => {
                     return <Opcion 
                         key={elemento} 
                         currentOpcion = {elemento}
+                        contador = {index + 1}
                         metodoBorrarOpcionIndividual = {props.metodoBorrarOpcionIndividual} 
                         />
                 })
