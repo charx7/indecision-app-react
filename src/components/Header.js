@@ -21,9 +21,9 @@ const Header = (props) =>{
     return (
         <div className= "header">
             {/* Usando props para mandar una variable de JS al rendereo del componente*/}
-            <h1>{props.titulo}</h1>
+            <h1 className = "header__titulo">{props.titulo}</h1>
             {/* Renderio del subtitulo solo si existe*/}
-            {props.subTitulo && <h2>{props.subTitulo}</h2>}
+            {props.subTitulo && <h2 className = "header__subtitulo">{props.subTitulo}</h2>}
         </div>
     );
 };
