@@ -1,0 +1,19 @@
+.widget {
+    background: $light-blue;
+    margin-bottom: $xl-size;
+}
+// Widget Header
+.widget-header {
+    background: $blue;
+    color: $off-white;
+    // Uso de flex-box
+    display: flex;
+    justify-content: space-between;
+    padding: $m-size;
+}
+
+// Selector de elemento para el widget header
+
+.widget-header-titulo {
+    margin: 0;
+}

@@ -158,16 +158,18 @@ class IndecisionApp extends React.Component {
                         opciones={this.state.opciones}
                         metodoGeneraTareaAzar = {this.metodoGeneraTareaAzar}
                     />
-                    {/* Rendereamos el componente de opciones */}
-                    <Opciones
-                        opciones={this.state.opciones}
-                        metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
-                        metodoBorrarOpcionIndividual = {this.metodoBorrarOpcionIndividual}
-                    />
-                    {/* Rendereamos el componente de aniadir opciones */}
-                    <AniadeOpcion 
-                        metodoAniadeOpcion = {this.metodoAniadeOpcion}
-                    />
+                    <div className="widget">
+                        {/* Rendereamos el componente de opciones */}
+                        <Opciones
+                            opciones={this.state.opciones}
+                            metodoBorrarTodoOpciones = {this.metodoBorrarTodoOpciones}
+                            metodoBorrarOpcionIndividual = {this.metodoBorrarOpcionIndividual}
+                        />
+                        {/* Rendereamos el componente de aniadir opciones */}
+                        <AniadeOpcion 
+                            metodoAniadeOpcion = {this.metodoAniadeOpcion}
+                        />
+                    </div>
                 </div>
                 {/* Definimos e importamos el Componente third party Modal que es una Alert bonita*/}
                 <OpcionModal 
