@@ -5,7 +5,8 @@ const Opcion = (props) => {
     return (
         <div>
             {props.currentOpcion}
-            <button 
+            <button
+                className='botones botones--link' 
                 onClick={(e) => {
                     {/* Hace que se pase el argumento de props a la funcion que borra la opcion*/}
                     props.metodoBorrarOpcionIndividual(props.currentOpcion);

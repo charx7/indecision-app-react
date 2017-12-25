@@ -1,0 +1,39 @@
+// Estilos de los botones
+.boton-grande {
+    background: $purple;
+    border: none;
+    // Uso de la funcion darken() para hacer un color mas oscuro
+    border-bottom: .6rem solid darken($purple, 10%);
+    color: white;
+    font-weight: bold;
+    font-size: $l-size;
+    // Hace que el boton ocupe todo el tamaña del contenedor
+    width: 100%;
+    // Para hacer espacio a los demas elementos
+    margin-bottom: $xl-size;
+    // Para hacer espacio del texto dentro del cuadrito XD
+    padding: 2.4rem;
+}
+
+// Estilos que solo se aplican cuando el boton esta disabled
+.boton-grande:disabled {
+    opacity: .5;
+}
+
+// Para todos los demas
+.botones {
+    background: $purple;
+    border: none;
+    border-bottom: .3rem solid darken($purple, 10%);
+    color: white;
+    font-weight: 500;
+    padding: $s-size;
+}
+
+// Modificadores para los remove
+.botones--link{
+    background: none;
+    border: none;
+    color: $off-white;
+    padding: 0;
+}

@@ -6,7 +6,7 @@ const Opciones = (props) => {
     return (
         <div>
             {/* Buton que remueve las opciones*/}
-            <button onClick={props.metodoBorrarTodoOpciones} > Borrar todas la opciones</button>
+            <button onClick={props.metodoBorrarTodoOpciones} className='botones botones--link' > Borrar todas la opciones</button>
             {/* Parrafo que se renderea cuando las opciones estan vacias*/}
             {props.opciones.length == 0 && <p>Aniada una opcion de cosas que hacer!</p>}
             {/* Usando Pops con arreglos y funcion de map para desplegar elementos de un arreglo en el componente

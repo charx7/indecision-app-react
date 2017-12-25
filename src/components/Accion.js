@@ -8,6 +8,7 @@ const Accion = (props) => {
         <div>
             {/* Usamos el metodo .bind() para que se pueda pasar el contexto al metodo de la clase*/}
             <button
+                className ='boton-grande'
                 onClick={props.metodoGeneraTareaAzar}
                 disabled = {!props.tieneOpciones}
                 >

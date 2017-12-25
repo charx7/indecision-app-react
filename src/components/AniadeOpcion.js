@@ -54,7 +54,7 @@ export default class AniadeOpcion extends React.Component {
                 {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.onFormSubmit}>
                     <input type="text" name="opcionNueva"/>
-                    <button>Aniade Opcion</button>
+                    <button className='botones'>Aniade Opcion</button>
                 </form>
             </div>
         );
